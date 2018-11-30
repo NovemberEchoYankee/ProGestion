@@ -136,62 +136,27 @@ var async = require('async');
         var mailU = req.body.mail;
         var roleU = req.body.role;
         var promotionU = null;
-        var imgProfileComplement = "";
+        var groupeU = null;
 
         if(roleU=="ETUDIANT")
             promotionU=req.body.promotion;
 
-        if (Object.keys(req.files).length !== 0) {
-            if(roleU=="ENSEIGNANT")
-                imgProfileComplement= "Ens";
-            else if(roleU=="ADMIN")
-                imgProfileComplement= "Adm";
-            else
-                imgProfileComplement= promotionU;
+        //if (prenomU !== 0) {
+			
+			var query = User.AddUser(username, password, prenomU, nomU, mailU, roleU, promotionU, groupeU, function (err, rows) {
+				if (err)
+					res.status(500).render('errorRequest.ejs', {
+						page_title: "Error",
+						role: req.user.roleU,
+						ressource: "/admin/users/"
+					});
 
-            var namefile = nomU+"_"+prenomU+"_"+imgProfileComplement+".jpg";
-
-            var sampleFile = req.files.sampleFile;
-
-            console.log("---------------");
-            console.log(namefile);
-            console.log(sampleFile);
-
-            sampleFile.mv('./assets/files/imgProfileUsers/' + namefile, function (err) {
-                if (err)
-                    return res.status(500).send(err);
-
-                console.log('File uploaded!');
-
-                var query = User.AddUser(username, password, prenomU, nomU, mailU, roleU, promotionU, namefile, function (err, rows) {
-                    if (err)
-                        res.status(500).render('errorRequest.ejs', {
-                            page_title: "Error",
-                            role: req.user.roleU,
-                            ressource: "/admin/users/"
-                        });
-
-                    res.status(200).redirect('/admin/users');
-                });
-            });
-        }
-        else {
-            namefile="profileImgDefault.jpeg";
-
-            var query = User.AddUser(username, password, prenomU, nomU, mailU, roleU, promotionU, namefile, function (err, rows) {
-                if (err)
-                    res.status(500).render('errorRequest.ejs', {
-                        page_title: "Error",
-                        role: req.user.roleU,
-                        ressource: "/admin/users/"
-                    });
-
-                res.status(200).redirect('/admin/users');
-            });
-        }
+				res.status(200).redirect('/admin/users');
+			});
+        //}
     });
 
-    router.post('/upload/:id&:img',  function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res) {
+    /*router.post('/upload/:id&:img',  function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res) {
 		
         if (!req.files)
             res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/users/" + req.param("id")});
@@ -212,7 +177,7 @@ var async = require('async');
                 res.status(200).redirect('/admin/users');
             });
         });
-    });
+    });*/
 	
 	/************************************************
 	UPLOAD IMPORT CSV
@@ -250,9 +215,9 @@ var async = require('async');
 							var mailU = rows[2];
 							var roleU = rows[3];
 							var promotionU = rows[4];
-							var namefile = null;
+							var groupeU = null;
 							
-							var query = User.AddUser(username, password, prenomU, nomU, mailU, roleU, promotionU, namefile, function (err, rows) {
+							var query = User.AddUser(username, password, prenomU, nomU, mailU, roleU, promotionU, groupeU, function (err, rows) {
 								if (err)
 									console.log(err);
 							})

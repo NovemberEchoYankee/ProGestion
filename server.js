@@ -10,7 +10,7 @@ var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 
 var app = express();
-var port = process.env.PORT || 8181;
+var port = process.env.PORT || 8080;
 
 // connection à la base de données;
 require('./config/passport')(passport); // pass passport for configuration
@@ -37,28 +37,9 @@ require('./app/Routes/routes.js')(app, passport); // load our routes and pass in
 
 app.use(express.static(__dirname + '/assets'));
 
-
-
-var cronFunction =require('./app/Routes/cronRoutes.js');
-
-var job = new CronJob('00 30 7 * * *', function() {
-        cronFunction.cronMail();
-
-    }, function () {
-        /* This function is executed when the job stops */
-    },
-    true,
-    "Europe/Paris"
-);
-
-
-
-
 app.use('/admin', require('./app/Routes/usersRoute.js'));
 app.use('/admin', require('./app/Routes/promosRoute.js'));
 app.use('/admin', require('./app/Routes/matieresRoute.js'));
-app.use('/admin', require('./app/Routes/seancesRoute.js'));
-app.use('/admin', require('./app/Routes/fichePresenceRoutes.js'));
 app.use('/etudiant', require('./app/Routes/etudiantRoutes.js'));
 app.use('/enseignant', require('./app/Routes/enseignantRoutes.js'));
 /*

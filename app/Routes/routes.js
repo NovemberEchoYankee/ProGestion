@@ -32,7 +32,7 @@ module.exports = function(app, passport) {
 				var returnTo = "etudiant/profile";
 				break;
 			case "ENSEIGNANT":
-				var returnTo = "enseignant/seance";
+				var returnTo = "enseignant/projet";
 				break;
 			case "ADMINISTRATION":
 				var returnTo = "admin/";

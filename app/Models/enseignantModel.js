@@ -10,11 +10,16 @@ var Etudiant={
     ObtEtuId:function(id, callback)
     {
         return connection.query("select * from seance where idS=?", [id], callback);
-    }/*,
+    },
+	
+	ObtProjetsByMatiere:function(id, matiere)
+	{
+		return connection.query("select * from projet where matiereProjet = m.idM ")
+	}
 
-    /!*PutUserId:function(id, nom, prenom, mail, promo, callback) {
+    /*PutUserId:function(id, nom, prenom, mail, promo, callback) {
         return connection.query("update users SET nomU=?, prenomU=?, mailU=?, promotionU=? where id=?", [nom, prenom, mail, promo, id], callback)
-    },*!/
+    },
 
     DelPromoId:function(id) {
         return connection.query("delete from promotion where idP=?", [id])

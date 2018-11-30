@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+    <head>
+        <title>projets</title>
+        <% include ../layout %>
+    </head>
+    <body>
+		<div class="wrapper">
+			<% include ../Menus/MenuEnseignant %>
+			<!-- Page Content  -->
+			<div id="content">
+
+				<div class="container">
+					<span class="pull-left"><h1 class="pull-left">projets :</h1></span>
+					<%if(projets.length!=0 && matieres.length!=0) { %>
+						<span class="pull-right"><a class="btn btn-success btn-lg" href="/<%= chemin %>create" role="button"><span class="glyphicon glyphicon-plus"></span></a></span>
+					<% } %>
+				</div>
+				<div class="container" id="MainMenu">
+					<div class="list-group panel">
+						<% if(matieres.length==0) { %>
+						<div class="list-group-item">
+							<div class="container">
+								<div class="col-md-12">
+									<div>Attention il n'y a plus de matieres enregistrés. Veuillez Créer des matieres pour créer des projets</div>
+								</div>
+							</div>
+						</div>
+						<% } %>
+						
+						<ul class="nav nav-tabs">
+							<% for(var i=0; i<=promos.length-1; i++) { %>
+								<li  <% if(i == 1){ %>class="active"<% } %> ><a href="#<%= promos[i].nomP %>" data-toggle="tab" ><%= promos[i].nomP %></a></li>
+							<% } %>
+						</ul>
+						<!-- ************************************************************** -->
+						
+						<div class="tab-content">
+							<% for(var i=0; i<=promos.length-1; i++) { %>
+								<div id="<%= promos[i].nomP %>" class="tab-pane fade in  <% if(i == 1){ %>class="active"<% } %>" >
+								
+								<% if (matieres.length !=0) { %>
+									<% for(var j=0; j<=matieres.length-1; j++) {
+										if(matieres[j].nomP == promos[i].nomP) {%>
+										<a href="#matiere<%=matieres[j].nomM.replace(/ /g, "")+matieres[j].nomP %>" class="list-group-item " data-toggle="collapse" data-parent="#MainMenu"><strong><%= matieres[j].nomM %>&nbsp;&nbsp;&nbsp;&nbsp;(<small><%=(matieres[j].nomP)%>)</small></strong></a>
+											<div class="collapse" id="matiere<%=matieres[j].nomM.replace(/ /g, "")+matieres[j].nomP  %>">
+												<% if(projets.length !=0) { %>
+													
+													<!-- <table class="table table-hover" id="tableToggle" style="background-color: white; height: 100px;"> 
+														<thead>
+															<tr>
+																<th class="info" style="text-align: center">Seances</th>
+																<th class="info" style="text-align: center">Date</th>
+																<th class="info" style="text-align: center">Heure début/Heure fin</th>
+																<th class="info" style="text-align: center">Statut</th>
+																<th class="info" style="text-align: center">Commentaire</th>
+																<th class="info" style="text-align: center">Enseignant</th>
+															</tr>
+														</thead>
+														<tbody>
+															<% var x = 0;
+																var numeroSeance = 0;
+															 for(var k=0; k<=seances.length-1; k++) {
+																if(seances[k].matiereS == matieres[j].idM) {
+																	x=1;
+																	numeroSeance+=1 %>
+																	<tr>
+																		<td class="align-middle" style="text-align: center"><b><%=numeroSeance%></b></td>
+																		<td class="align-middle" style="text-align: center"><b><%=(moment(seances[k].dateS).format("DD/MM/YYYY"))%></b></td>
+																		<td class="align-middle" style="text-align: center"><%=(moment(seances[k].heureDebut, "HH:mm:ss").format("HH:mm"))%> - <%=(moment(seances[k].heureFin, "HH:mm:ss").format("HH:mm"))%></td>
+																		<td class="align-middle" style="text-align: center"><%= ((seances[k].valideS)!=0)? "Validé" : "Non Validé" %></td>
+																		<td class="align-middle" style="text-align: left"><%=(seances[k].commentaire)%></td>
+												
+																		<% for(var l=0; l<=enseignants.length-1; l++) {
+																			if(seances[k].userS == enseignants[l].id) {%>
+																				<td class="align-middle" style="text-align: left"><%=(enseignants[l].nomU)%></td>
+																			<%} %>
+																		<%} %>
+																		<% if(moment(new Date()).format("YYYY-MM-DD") == seances[k].dateS && moment(new 	Date()).format("HH:mm") <= seances[k].heureFin
+																			|| moment(new Date()).format("YYYY-MM-DD") < seances[k].dateS) 
+																		{ %>
+																			<td class="align-middle" style="text-align: center"><a class="btn btn-danger" href="/<%= chemin %>" onclick="deleteItem('<%= seances[k].idS %>', '<%= chemin %>')" role="button"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;&nbsp;&nbsp;
+																			<a class="btn btn-primary" href="/<%= chemin %><%= seances[k].idS %>" role="button"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;&nbsp;</td>
+																	 <% } %>
+																	</tr>
+																<%}%>
+															<% } %>
+														</tbody>
+													</table>-->
+												<% }%>
+												<% if(projets.length == 0) { %>
+													<div class="list-group-item">
+														<div class="container">
+															<div class="col-md-9">
+																<div>Il n'y a pas de projets pour cette matière.</div>
+															</div>
+														</div>
+													</div>
+												<% } %>
+											</div>
+										<%}%>
+										<% } %>
+									<% } %>
+								</div>
+							<% } %>
+						</div>
+						<!-- ************************************************************** -->              
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-4">
+					  <div class="card mb-4 shadow-sm" style="background-color: rgb(63,63,63); color:white;">
+						<img class="card-img-top" src="../files/team_work_image2.jpg" alt="Card image cap">
+						<div class="card-body">
+						  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+						  <small class="text-muted">9 mins</small>
+						  <div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group btn-group-lg" style="width:100%;">
+								<button type="button" class="btn btn-warning" style="width:33%;">Editer</button>
+								<button type="button" class="btn btn-success" style="width:33%;">Valider</button>
+								<button type="button" class="btn btn-danger" style="width:33%;">Rejeter</button>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+					<div class="col-md-4">
+					  <div class="card mb-4 shadow-sm" style="background-color: rgb(63,63,63); color:white;">
+						<img class="card-img-top" src="../files/team_work_image2.jpg" alt="Card image cap">
+						<div class="card-body">
+						  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+						  <small class="text-muted">9 mins</small>
+						  <div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group btn-group-lg" style="width:100%;">
+								<button type="button" class="btn btn-warning" style="width:33%;">Editer</button>
+								<button type="button" class="btn btn-success" style="width:33%;">Valider</button>
+								<button type="button" class="btn btn-danger" style="width:33%;">Rejeter</button>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+					<div class="col-md-4">
+					  <div class="card mb-4 shadow-sm" style="background-color: rgb(63,63,63); color:white;">
+						<img class="card-img-top" src="../files/team_work_image2.jpg" alt="Card image cap">
+						<div class="card-body">
+						  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+						  <small class="text-muted">9 mins</small>
+						  <div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group btn-group-lg" style="width:100%;">
+								<button type="button" class="btn btn-lg btn-warning" style="width:100%;">Editer</button>
+							</div>
+							
+						  </div>
+						</div>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </body>
+</html>

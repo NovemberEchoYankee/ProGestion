@@ -1,6 +1,5 @@
 var Matiere = require('../Models/matieresModel');
 var Promotion = require('../Models/promosModel');
-var Seance = require('../Models/seancesModel');
 var CheckLog = require('../CheckLogin');
 
 var router = require('express').Router();

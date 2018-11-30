@@ -1,6 +1,6 @@
 var Etudiant = require('../Models/etudiantModel');
 var CheckLog = require('../CheckLogin');
-var Seance = require('../Models/seancesModel');
+var Projet = require('../Models/projetsModel');
 
 var router = require('express').Router();
 var format = require('date-format');

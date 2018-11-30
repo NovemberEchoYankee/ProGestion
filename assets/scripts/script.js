@@ -72,7 +72,6 @@ function confirmBeforeDeleteAdmin(idItem, chemin) {
 
 function deleteItem(idItem, chemin) {
 	$.ajax({
-		//url: "http://qrcode.guillaumeperes.fr/"+chemin+idItem,
 		url:"http://localhost:8080/"+chemin+idItem,
 		type: 'delete',
     });

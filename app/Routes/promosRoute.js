@@ -1,7 +1,7 @@
 var CheckLog = require('../CheckLogin');
 var Promo = require('../Models/promosModel');
 var Matiere = require('../Models/matieresModel');
-var Seance = require('../Models/seancesModel');
+var Projet = require('../Models/projetsModel');
 
 var router = require('express').Router();
 var async = require('async');
@@ -57,7 +57,7 @@ router.delete('/promotions/:id?', function(req, res, next){ CheckLog(req, res, n
             function(parallel_done) {
                 var query2 = Matiere.ObtAllMatieresByPromo(req.param("id"), function (err, rows2) {
                     rows2.forEach(function (element) {
-                        var query4 = Seance.DelSeanceByMatiere(element.idM, function (err, rows) {
+                        var query4 = Projet.DelprojetByMatiere(element.idM, function (err, rows) {
                             if (err)
                                 res.status(500).render('errorRequest.ejs', {
                                     page_title: "Error", role:req.user.roleU,

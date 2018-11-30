@@ -4,16 +4,21 @@
     <% include layout %>
 </head>
     <body>
-        <% if (role == "ETUDIANT"){ %>
-            <% include Menus/MenuEtudiant %>
-        <% } else if (role == "ENSEIGNANT"){ %>
-            <% include Menus/MenuEnseignant %>
-        <% } else { %>
-            <% include Menu %>
-        <% } %>
-    <div class="container">
-            <h1> ERROR RESSOURCE</h1>
-            <h2> La ressource <%= ressource %> demandée est inexistante</h2>
-        </div>
-    </body>
+		<div class="wrapper">	
+			<% if (role == "ETUDIANT"){ %>
+				<% include Menus/MenuEtudiant %>
+			<% } else if (role == "ENSEIGNANT"){ %>
+				<% include Menus/MenuEnseignant %>
+			<% } else { %>
+				<% include Menu %>
+			<% } %>
+			<!-- Page Content  -->
+			<div id="content">
+				<div class="container">
+					<h1> ERROR RESSOURCE</h1>
+					<h2> La ressource <%= ressource %> demandée est inexistante</h2>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>

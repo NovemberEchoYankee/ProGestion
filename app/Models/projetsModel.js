@@ -1,16 +1,16 @@
 var connection=require('../../config/dbconnection');
 
-var Seance={
-    ObtAllSeances:function(callback)
+var Projet={
+    ObtAllProjets:function(callback)
     {
-        return connection.query("select s.*, m.nomM, m.promotionS, p.idP, p.nomP "
-		+ "from seance s "
-		+ "inner join matiere m ON s.matiereS=m.idM "
-		+ "inner join promotion p on m.promotionS=p.idP "
-		+ "Order by m.nomM, s.dateS DESC ", callback);
+        return connection.query("select pr.*, m.nomM, m.promotionM, pr.idProjet, pr.nomProjet "
+		+ "from projet pr "
+		+ "inner join matiere m ON pr.matiereProjet=m.idM "
+		+ "inner join promotion p on m.promotionM=p.idP "
+		+ "Order by m.nomM ", callback);
     },
 
-    ObtSeanceId:function(id, callback) {
+    /*ObtSeanceId:function(id, callback) {
         return connection.query("select * from seance where idS=?", [id], callback)
     },
 
@@ -63,31 +63,13 @@ var Seance={
         return connection.query("update seance SET nomS=?, dateS=?, heureDebut=?, heureFin=?, commentaire=?, matiereS=?, userS=? where idS=?", [nom, date, hDebut, hFin, commentaire, matiere, user, id], callback)
     },
 
-    ValiderSeance:function(id, commentaire, callback) {
-        return connection.query("update seance SET commentaire=?, valideS=1 where idS=?", [commentaire, id], callback)
-    },
-
     DelSeanceId:function(id) {
         return connection.query("delete from seance where idS=?", [id])
+    },*/
+
+    DelProjetByMatiere : function (id) {
+        return connection.query("delete from projet where matiereprojet=?", [id])
     },
 
-    DelSeanceByMatiere : function (id) {
-        return connection.query("delete from seance where matiereS=?", [id])
-    },
-
-    CronSeanceEnseignant:function(date, callback)
-    {
-        return connection.query("select s.*, u.mailU from seance s inner join users u on s.userS=u.id where dateS=? Order by u.mailU, s.heureDebut", [date], callback);
-    },
-
-    EdtEnseignant:function(id, date, callback)
-    {
-        return connection.query("select * from seance s inner join matiere m on s.matiereS=m.idM inner join users u on s.userS=u.id where s.userS=? and s.dateS=? order by s.heureDebut", [id, date], callback);
-    },
-	
-    EdtEtudiant:function(id, date, callback)
-    {
-        return connection.query("select * from users u inner join matiere m on u.promotionU=m.promotionS inner join seance s on m.idM=s.matiereS where u.id=? and s.dateS=? order by s.heureDebut", [id, date], callback);
-    }
 };
-module.exports=Seance;
+module.exports=Projet;

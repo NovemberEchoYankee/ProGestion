@@ -25,12 +25,15 @@
 									<% if(matieres.length !=0) {
 										var x = 0;
 										for(var j=0; j<=matieres.length-1; j++) {
-											if(matieres[j].promotionS == promos[i].idP) {
+											if(matieres[j].promotionM == promos[i].idP) {
 												x=1; %>
 												<div class="list-group-item">
 													<div class="container">
-														<div class="col-md-9">
+														<div class="col-md-5">
 															<div><strong><%=(matieres[j].nomM.toUpperCase())%></strong></div>
+														</div>
+														<div class="col-md-5">
+															<div><strong><%=(matieres[j].nomU) + " " + (matieres[j].prenomU)%></strong></div>
 														</div>
 														<div class="col-md-2">
 															<span class="pull-right"><a class="btn btn-danger" href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= matieres[j].idM %>', '<%= chemin %>')" role="button"><span class="glyphicon glyphicon-trash"></span></a>&nbsp;&nbsp;&nbsp;</span>

@@ -24,6 +24,14 @@
                             <% } %>
                         </select>
                     </div>
+					<div class="form-group">
+                        <label>Enseignant :</label>
+                        <select name="enseignant">
+                            <% for(var i=0; i<enseignants.length; i++) {%>
+                            <option value="<%=enseignants[i].id%>"><%=enseignants[i].nomU +" "+ enseignants[i].prenomU%></option>
+                            <% } %>
+                        </select>
+                    </div>
                     <div class="pull-right">
                         <a href="/<%= chemin %>" class="btn btn-secondary btn-lg">Annuler</a>
                         <button type="submit" class="btn btn-success btn-lg">Créer</button>

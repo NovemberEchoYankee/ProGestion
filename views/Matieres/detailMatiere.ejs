@@ -24,7 +24,14 @@
                         <% } %>
                     </select>
                 </div>
-
+				<div class="form-group">
+					<label>Enseignant :</label>
+					<select name="enseignant">
+						<% for(var i=0; i<enseignants.length; i++) {%>
+						<option value="<%=enseignants[i].id%>"><%=enseignants[i].nomU +" "+ enseignants[i].prenomU%></option>
+						<% } %>
+					</select>
+				</div>
                 <div class="pull-right">
                     <a href="/admin/matieres" class="btn btn-secondary btn-lg">Annuler</a>
                     <a class="btn btn-primary btn-lg" onclick="formMatiereOK('<%= matieres[0].idM %>', '<%= chemin %>')">Appliquer</a>

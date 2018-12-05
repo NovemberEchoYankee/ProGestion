@@ -1,116 +1,209 @@
 var Projet = require('../Models/projetsModel');
 var Matiere = require('../Models/matieresModel');
 var Promo = require('../Models/promosModel');
+var User = require('../Models/usersModel');
 var CheckLog = require('../CheckLogin');
 
 var router = require('express').Router();
 var moment = require('moment');
-
+var async = require('async');
 // =====================================
 // ENSEIGNANT ==========================
 // =====================================
 
-router.get('/projet', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
+// Si chemin/create alors creerProjet sinon éditer sinon afficher
+router.get('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
 {
 	var data = {};
+    var data2 = {};
 
-	var tabPromos = [];
-	var tabMatieres = [];
-	var tabprojets = [];
+	if(req.params.id) {
+        if(req.param("id")=="create") {
+			async.parallel([
+                function (parallel_done) {
+					var query = Promo.ObtAllPromos(function (err, rows) {
+						if (err)
+							res.status(500).render('errorRequest.ejs', {page_title:"Error P3", role:req.user.roleU, ressource: "/enseignant/projet"}+ req.param("id"));
+						if (rows.length <= 0) {
+							res.status(404).render('errorRessource.ejs', {
+								page_title: "Error", role:req.user.roleU,
+								ressource: "/enseignant/projet/" + req.param("id")
+							});
+						}
+						data.table=rows;
+						parallel_done();
+                    });
+                },
+                function (parallel_done) {
+                    var query1 = Matiere.ObtMatieresEnseignant(req.user.id, function (err, rows1) {
+                        if (err)
+                        {
+                            res.status(500).render('errorRequest.ejs', {page_title:"Error M3", role:req.user.roleU, ressource: "/enseignant/projet"}+ req.param("id"));
+                            return false;
+                        }
+                        if (rows1.length <= 0) {
+                            res.status(404).render('errorRessource.ejs', {
+                                page_title: "Error", role:req.user.roleU,
+                                ressource: "/enseignant/projet/" + req.param("id")
+                            });
+                            return false;
+                        }
+                        data.table1 = rows1;
+                        parallel_done();
+                    });
+                },
+            ], function (err) {
+                if (err)
+                    res.status(500).render('errorRequest.ejs', {page_title:"Error A3", role:req.user.roleU, ressource: "/enseignant/projet"}+ req.param("id"));
+                else
+                    res.status(200).render('Projets/createProjet.ejs', {page_title: "createProjet", promos:data.table, matieres:data.table1, chemin: "enseignant/projet/"});
+            });
+        }
+        else
+        {
+            async.parallel([
+                function (parallel_done) {
+                    var query = Projet.ObtProjetId(req.params.id, function (err, rows) {
+                        if (err)
+                        {
+                            res.status(500).render('errorRequest.ejs', {page_title:"Error PR2", role:req.user.roleU, ressource: "/enseignant/projet"}+ req.param("id"));
+                            return false;
+                        }
+                        if (rows.length <= 0) {
+                            res.status(404).render('errorRessource.ejs', {
+                                page_title: "Error", role:req.user.roleU,
+                                ressource: "/enseignant/projet/" + req.param("id")
+                            });
+                            return false;
+                        }
 
-	var query = Promo.ObtAllPromos(function (err, rows) {
-		if (err){
-			res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/projet/"});
-		}
-		else{
-			data.table=rows;
-			rows.forEach(function(element) {
-				tabPromos.push(element);	
-			});
-		}
-	});
-	
-	idEnseignant = req.user.id;
-	var query2 = Matiere.ObtMatieresEnseignant(idEnseignant, function (err, rows2) 
-	{
-		if (err){
-			res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/projet/"});
-		}
-		else{
-			rows2.forEach(function(element) {
-				tabMatieres.push(element);	
-			});
-		}
-	});
-	
-	var query3 = Projet.ObtAllProjets(function(err,rows3)
-	{
-		if(err)
-			res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/projet/"});
+                        data.table = rows;
+                        parallel_done();
+                    });
+                },
+                function (parallel_done) {
+                    var query1 = Promo.ObtAllPromos(function (err, rows2) {
+                        if (err)
+                        {
+                            res.status(500).render('errorRequest.ejs', {page_title:"Error P2", role:req.user.roleU, ressource: "/enseignant/projet"}+ req.param("id"));
+                            return false;
+                        }
+                        if (rows2.length <= 0) {
+                            res.status(404).render('errorRessource.ejs', {
+                                page_title: "Error", role:req.user.roleU,
+                                ressource: "/enseignant/projet/" + req.param("id")
+                            });
+                            return false;
+                        }
+                        data.table1 = rows2;
+                        parallel_done();
+                    });
+                },
+				function (parallel_done) {
+                    var query2 = Matiere.ObtMatieresEnseignant(req.user.id, function (err, rows3) {
+                        if (err)
+                        {
+                            res.status(500).render('errorRequest.ejs', {page_title:"Error M2", role:req.user.roleU, ressource: "/enseignant/projet"}+ req.param("id"));
+                            return false;
+                        }
+                        if (rows3.length <= 0) {
+                            res.status(404).render('errorRessource.ejs', {
+                                page_title: "Error", role:req.user.roleU,
+                                ressource: "/enseignant/projet/" + req.param("id")
+                            });
+                            return false;
+                        }
+                        data.table2 = rows3;
+                        parallel_done();
+                    });
+                },
+            ], function (err) {
+                if (err)
+                    res.status(500).render('errorRequest.ejs', {page_title:"Error A2", role:req.user.roleU, ressource: "/enseignant/projet"}+ req.param("id"));
+                else
+                    res.status(200).render('Projets/detailProjet.ejs', {page_title: "detailProjet", matieres:data.table2, promos:data.table1, projet:data.table, chemin: "enseignant/projet/"});
+            });
+        }
+    }
+    else
+    {
+        async.parallel([
+            function(parallel_done) {
+                var query = Matiere.ObtMatieresEnseignant(req.user.id, function(err,rows)
+                {
+                    if(err)
+                        res.status(500).render('errorRequest.ejs', {page_title:"Error M", role:req.user.roleU, ressource: "/enseignant/projet"});
 
-		rows3.forEach(function(element) {
-			tabprojets.push(element);
-		});
-	});
+                    data2.table = rows;
+					console.log(data2.table);
+                    parallel_done();
+                });
+            },
+            function(parallel_done) {
+                var query2 = Promo.ObtAllPromos(function (err, rows2) {
+                    if (err)
+                        res.status(500).render('errorRequest.ejs', {page_title:"Error P", role:req.user.roleU, ressource: "/enseignant/projet"});
 
-		res.status(200).render('Projets/allProjets.ejs',{page_title:"allProjets", promotions:data.table, promos:tabPromos, matieres:tabMatieres, projets:tabprojets, chemin:"enseignant/projet/"});
+                    data2.table1 = rows2;
+					console.log(data2.table1);
+                    parallel_done();
+                });
+            },
+			function(parallel_done) {
+                var query3 = Projet.ObtAllProjets(function (err, rows3) {
+                    if (err)
+                        res.status(500).render('errorRequest.ejs', {page_title:"Error Pr", role:req.user.roleU, ressource: "/enseignant/projet"});
+
+                    data2.table2 = rows3;
+					console.log(data2.table2);
+                    parallel_done();
+                });
+            }
+        ], function(err){
+            if(err)
+                res.status(500).render('errorRequest.ejs', {page_title:"Error A", role:req.user.roleU, ressource: "/enseignant/projet"});
+            else
+                res.status(200).render('Projets/allProjets.ejs',{page_title:"allProjets", matieres:data2.table, promos:data2.table1, projets:data2.table2, chemin:"enseignant/projet/"});
+        });
+    }
 });
 
-router.get('/syntheseProjet', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
+//Ajouter projet, si enseignant initiative étudiante projet == 1, si étudiant initiative étudiante == 0
+router.post('/projet',function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
 {
-	var data = {};
-
-	var tabPromos = [];
-	var tabMatieres = [];
-	var tabprojets = [];
-
-	var query = Promo.ObtAllPromos(function (err, rows) {
-		if (err){
-			res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/syntheseProjet/"});
-		}
-		else{
-			rows.forEach(function(element) {
-				tabPromos.push(element);	
-			});
-		}
-	});
+	initiativeEtudianteProjet = 0;
+	statutProjet = 0;
 	
-	var query = Matiere.ObtAllMatieres(function (err, rows) 
-	{
-		if (err){
-			res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/syntheseProjet/"});
-		}
-		else{
-			rows.forEach(function(element) {
-				tabMatieres.push(element);	
-			});
-		}
-	});
+	if(req.user.roleU == "ETUDIANT"){
+		initiativeEtudianteProjet = 1;
+	} else if(req.user.roleU == "ENSEIGNANT"){
+		statutProjet = 1;
+	}
 	
-	var query = Projet.ObtAllProjets(function(err,rows)
-	{
-		if(err)
-			res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/syntheseProjet/"});
-
-		rows.forEach(function(element) {
-			tabprojets.push(element);
-		});
-	});
-
-		res.status(200).render('Projets/syntheseProjets.ejs',{page_title:"allProjets", promos:tabPromos, matieres:tabMatieres, projets:tabprojets, chemin:"enseignant/projet/"});
+    var query = Projet.PostProjet(req.body.nom, req.body.description, req.body.fonctionnalite, statutProjet, req.body.matiere, initiativeEtudianteProjet, function (err, rows) {
+        if (err)
+            res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/projet"});
+        else
+            res.status(201).redirect('/enseignant/projet');
+    });
 });
 
-
+//Modifier projet
 router.put('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
 {
     if (req.param("id"))
     {
-        var commentaire = req.body.commentaire;
-        var id = req.param("id");
-
-        var query = Seance.ValiderSeance(id, commentaire, function (err, rows) {
+        var nomP = req.body.nom;
+        var descriptionP = req.body.description;
+        var fonctionnaliteP = req.body.fonctionnalite;
+		var matiereP = req.body.matiere;
+		
+		console.log(descriptionP);
+		console.log(matiereP);
+		
+        var query = Projet.PutProjetId(req.param("id"), nomP, descriptionP, fonctionnaliteP, matiereP, function (err, rows) {
             if (err)
-                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/seance"}+ req.param("id"));
+                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/projet"}+ req.param("id"));
         });
     }
 });

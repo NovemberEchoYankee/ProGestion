@@ -42,6 +42,9 @@ app.use('/admin', require('./app/Routes/promosRoute.js'));
 app.use('/admin', require('./app/Routes/matieresRoute.js'));
 app.use('/etudiant', require('./app/Routes/etudiantRoutes.js'));
 app.use('/enseignant', require('./app/Routes/enseignantRoutes.js'));
+app.use('/enseignant', require('./app/Routes/promosRoute.js'));
+app.use('/enseignant', require('./app/Routes/matieresRoute.js'));
+app.use('/enseignant', require('./app/Routes/usersRoute.js'));
 /*
 app.use('/cron', require('./app/Routes/cronRoutes.js'));
 */

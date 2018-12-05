@@ -50,25 +50,6 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
                         parallel_done();
                     });
                 },
-				/*function (parallel_done) {
-                    var query2 = Matiere.ObtMatiereId(req.params.id, function (err, rows2) {
-                        if (err)
-                        {
-                            res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/matiere"}+ req.param("id"));
-                            return false;
-                        }
-                        if (rows2.length <= 0) {
-                            res.status(404).render('errorRessource.ejs', {
-                                page_title: "Error", role:req.user.roleU,
-                                ressource: "/admin/matieres/" + req.param("id")
-                            });
-                            return false;
-                        }
-
-                        data.table2 = rows2;
-                        parallel_done();
-                    });
-                },*/
             ], function (err) {
                 if (err)
                     res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/matiere"}+ req.param("id"));

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Détail Projet</title>
+		<% include ../layout %>
+	</head>
+	<body>
+		<div class="wrapper">
+			<% include ../Menus/MenuEnseignant %>
+			<!-- Page Content  -->
+			<div id="content">
+				<div class="container">
+					<div class="col-sm-6 col-sm-offset-3">
+						<h1><span class="fa fa-sign-in"></span>Modifier le Projet</h1>
+
+						<form id="form" name="projetModif" >
+							<div class="form-group">
+								<label>Nom</label>
+								<input type="text" class="form-control" name="nom" value="<%=(projet[0].nomProjet.toUpperCase())%>" maxlength="50" required>
+							</div>
+							<div class="form-group">
+								<label>Description</label>
+								<input type="text" class="form-control" name="description" value="<%=(projet[0].descriptionProjet)%>" maxlength="50" required>
+							</div>
+							<div class="form-group">
+								<label>Fonctionnalitès</label>
+								<input type="text" class="form-control" name="fonctionnalite" value="<%=(projet[0].fonctionnaliteProjet)%>" maxlength="50" required>
+							</div>
+							<div class="form-group">
+								<label>Matieres</label>
+								<select name="matiere">
+									<% for(var i=0; i<matieres.length; i++) {%>
+										<option value="<%=matieres[i].idM%>" selected="selected" ><%=matieres[i].nomM%></option>
+									<% } %>
+								</select>
+							</div>
+							<div class="pull-right">
+								<a href="/<%= chemin %>" class="btn btn-secondary btn-lg">Annuler</a>
+								<a class="btn btn-primary btn-lg" onclick="formProjetOK('<%= projet[0].idProjet %>', '<%= chemin %>')">Appliquer</a>
+								<a id="redirection" href="/<%= chemin %>"></a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+

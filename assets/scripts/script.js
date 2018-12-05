@@ -22,13 +22,13 @@ function formMatiereOK (idItem, chemin) {
     }
 }
 
-function formSeanceOK (idItem, chemin) {
+function formProjetOK (idItem, chemin) {
 
-    var valueNom = window.document.seancemodif.nom.value;
-    var valueDate = window.document.seancemodif.date.value;
-    var valuehDebut = window.document.seancemodif.hDebut.value;
-    var valuehFin = window.document.seancemodif.hFin.value;
-    if (valueNom == "" || valueDate =="" || valuehDebut == "" || valuehFin =="")
+    var valueNom = window.document.projetModif.nom.value;
+    var valueDescription = window.document.projetModif.description.value;
+    var valueFonctionnalite = window.document.projetModif.fonctionnalite.value;
+    var valueMatiere = window.document.projetModif.matiere.value;
+    if (valueNom == "" || valueDescription =="" || valueFonctionnalite == "")
         alert("Tous les champs ne sont pas remplis");
     else {
         modifyItem(idItem, chemin);

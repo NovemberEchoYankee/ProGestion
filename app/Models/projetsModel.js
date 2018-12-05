@@ -1,19 +1,40 @@
 var connection=require('../../config/dbconnection');
 
 var Projet={
-    ObtAllProjets:function(callback)
-    {
-        return connection.query("select pr.*, m.nomM, m.promotionM, pr.idProjet, pr.nomProjet "
+    // ObtAllProjets:function(callback)
+    // {
+        // return connection.query("select pr.*, m.nomM, m.promotionM, p.nomP"
+		// + "from projet pr"
+		// + "inner join matiere m ON pr.matiereProjet=m.idM"
+		// + "inner join promotion p on m.promotionM=p.idP"
+		// + "Order by m.nomM", callback);
+    // },
+	
+	ObtAllProjets:function(callback)
+    {	
+		return connection.query("select pr.*, m.nomM, m.promotionM, p.nomP, u.nomU "
 		+ "from projet pr "
 		+ "inner join matiere m ON pr.matiereProjet=m.idM "
 		+ "inner join promotion p on m.promotionM=p.idP "
-		+ "Order by m.nomM ", callback);
+		+ "left join groupe g on pr.idProjet=g.projetG "
+		+ "left join users u on g.idG=u.groupeU "
+		+ "Order by pr.idProjet ASC", callback);
+	},
+
+    ObtProjetId:function(id, callback) {
+        return connection.query("select * from projet where idProjet=?", [id], callback)
     },
 
-    /*ObtSeanceId:function(id, callback) {
-        return connection.query("select * from seance where idS=?", [id], callback)
-    },
 
+    PostProjet: function(nom, description, fonctionnalite, statut, matiere, initiativeEtudiante, callback){
+        return connection.query("INSERT INTO projet (nomProjet, descriptionProjet, fonctionnaliteProjet, statutProjet, matiereProjet, initiativeEtudianteprojet) values (?,?,?,?,?,?)", [nom, description, fonctionnalite, statut, matiere, initiativeEtudiante], callback);
+    },
+	
+    PutProjetId:function(id, nomP, descriptionP, fonctionnaliteP, matiereP, callback) {
+        return connection.query("update projet SET nomProjet=?, descriptionProjet=?, fonctionnaliteProjet=?, matiereProjet=? where idProjet=?", [nomP, descriptionP, fonctionnaliteP, matiereP, id], callback)
+    },
+	
+		/*
     ObtSeancesFiche:function(idPromo, date, callback){
         return connection.query("SELECT s.idS, s.nomS, s.dateS, s.heureDebut, s.heureFin, s.valideS, m.idM, m.nomM, p.idP, p.nomP, u.nomU, u.prenomU "
             + "from seance s "
@@ -55,21 +76,13 @@ var Projet={
         return connection.query("SELECT * FROM seance WHERE nomS=? and dateS=? and heureDebut=? and heureFin=? and matiereS=?, userS=?",[nom, date, hDebut, hFin, matiere, enseignant], callback)
     },
 
-    PostSeance: function(nom, date, hDebut, hFin, matiere, user, callback){
-        return connection.query("INSERT INTO seance (nomS, dateS, heureDebut, heureFin, matiereS, userS) values (?,?,?,?,?,?)", [nom, date, hDebut, hFin, matiere, user], callback);
-    },
-
-    PutSeanceId:function(id, nom, date, hDebut, hFin, commentaire, matiere, user, callback) {
-        return connection.query("update seance SET nomS=?, dateS=?, heureDebut=?, heureFin=?, commentaire=?, matiereS=?, userS=? where idS=?", [nom, date, hDebut, hFin, commentaire, matiere, user, id], callback)
-    },
-
     DelSeanceId:function(id) {
         return connection.query("delete from seance where idS=?", [id])
     },*/
 
     DelProjetByMatiere : function (id) {
         return connection.query("delete from projet where matiereprojet=?", [id])
-    },
+    }
 
 };
 module.exports=Projet;

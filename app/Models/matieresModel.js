@@ -23,7 +23,12 @@ var Matiere={
 	
 	ObtMatieresEnseignant:function(idEnseignant, callback)
     {
-        return connection.query("select * from matiere where enseignantM=?", [idEnseignant], callback);
+        return connection.query("select m.*, p.nomP, u.nomU, u.prenomU "
+		+ "from matiere m "
+		+ "inner join users u ON m.enseignantM=u.id "
+		+ "inner join promotion p on m.promotionM=p.idP "
+		+ "where enseignantM=? "
+		+ "Order by m.nomM", [idEnseignant], callback);
     },
 
     ObtMatiereId:function(id, callback)

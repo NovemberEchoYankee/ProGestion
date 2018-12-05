@@ -74,11 +74,11 @@ var Projet={
 
     CheckSeance: function(nom, date, hDebut, hFin, matiere, enseignant, callback){
         return connection.query("SELECT * FROM seance WHERE nomS=? and dateS=? and heureDebut=? and heureFin=? and matiereS=?, userS=?",[nom, date, hDebut, hFin, matiere, enseignant], callback)
-    },
-
-    DelSeanceId:function(id) {
-        return connection.query("delete from seance where idS=?", [id])
     },*/
+
+    DelProjetId:function(id) {
+        return connection.query("delete from projet where idProjet=?", [id])
+    },
 
     DelProjetByMatiere : function (id) {
         return connection.query("delete from projet where matiereprojet=?", [id])

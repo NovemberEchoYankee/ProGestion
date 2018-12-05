@@ -208,6 +208,31 @@ router.put('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "E
     }
 });
 
+//Supprimer projet
+router.delete('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
+{
+    if(req.param("id")) {
+        async.parallel([
+            function(parallel_done) {
+
+                var query = Projet.DelProjetId(req.param("id"), function (err, rows) {
+                    if (err)
+                        res.status(500).render('errorRequest.ejs', {
+                            page_title: "Error", role:req.user.roleU,
+                            ressource: "/enseignant/projet"
+                        } + req.param("id"));
+
+                    parallel_done();
+
+                });
+            }
+            ], function(err){
+                    if(err)
+                        res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/projet"});
+        });
+    }
+});
+
 router.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
     res.status(200).render('profile.ejs', { user : req.user });
 });

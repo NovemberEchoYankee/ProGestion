@@ -94,10 +94,3 @@ function CachePromo() {
     }
 }
 
-function chargeListEtudiant() {
-    $("#switch").toggleClass("trombi");
-    if(!($("#switch").hasClass("trombi")))
-        $("#listEtu").load("listEtuStandard");
-    else
-        $("#listEtu").load("listEtuTrombinoscope");
-}

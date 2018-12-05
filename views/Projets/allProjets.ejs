@@ -78,7 +78,7 @@
 																			<div class="card mb-4 shadow-lg" style="background-color: rgb(63,63,63); color:white;">
 																				<img class="card-img-top" src="../files/team_work_image2.jpg" alt="Card image cap">
 																				<div class="card-body">
-																					<h2><%=projets[k].nomProjet %></h2>
+																					<h2><%=projets[k].nomProjet %> </h2><button onclick="confirmBeforeDelete('<%= projets[k].idProjet %>', '<%= chemin %>')" class="btn btn-lg btn-danger" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
 																					<p class="card-text"><%=projets[k].descriptionProjet %></p>
 																					<% fonctionnaliteProjet = projets[k].fonctionnaliteProjet %>
 																					<p class="card-text">Fonctionnalités : <%= fonctionnaliteProjet %></p>
@@ -88,11 +88,11 @@
 																						<div class="btn-group btn-group-lg" style="width:100%;">
 																						<% if(projets[k].statutProjet==1) {%>
 																							<!-- <button type="button" class="btn btn-lg btn-warning" style="width:100%;">Editer</button> -->
-																							<button onclick="location.href='/<%= chemin %><%= projets[k].idProjet %>'" class="btn btn-lg btn-warning" style="width:100%;" type="button">Editer</button>
+																							<button onclick="location.href='/<%= chemin %><%= projets[k].idProjet %>'" class="btn btn-lg btn-warning" style="width:100%;" type="button"><span class="glyphicon glyphicon-edit"></span> Editer</button>
 																					
 																						<%}else{%>
-																							<button type="button" class="btn btn-success" style="width:50%;">Valider</button>
-																							<button type="button" class="btn btn-danger" style="width:50%;">Rejeter</button>
+																							<button type="button" class="btn btn-success" style="width:50%;"><span class="glyphicon glyphicon-ok"></span> Valider</button>
+																							<button type="button" class="btn btn-danger" style="width:50%;"><span class="glyphicon glyphicon-remove"></span> Rejeter</button>
 																						<%}%>
 																						</div>
 																					</div>
@@ -114,7 +114,7 @@
 																			<div class="card mb-4 shadow-lg" style="background-color: rgb(63,63,63); color:white;">
 																				<img class="card-img-top" src="../files/team_work_image2.jpg" alt="Card image cap">
 																				<div class="card-body">
-																					<h2><%=projets[k].nomProjet %></h2>
+																					<h2><%=projets[k].nomProjet %></h2><button onclick="confirmBeforeDelete('<%= projets[k].idProjet %>', '<%= chemin %>')" class="btn btn-lg btn-danger" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
 																					<p class="card-text"><%=projets[k].descriptionProjet %></p>
 																					<% fonctionnaliteProjet = projets[k].fonctionnaliteProjet.replace(/<br[^>]*>/gi, "\n"); %>
 																					<p class="card-text">Fonctionnalités : <%= fonctionnaliteProjet %></p>
@@ -123,10 +123,10 @@
 																					<div class="d-flex justify-content-between align-items-center">
 																						<div class="btn-group btn-group-lg" style="width:100%;">
 																						<% if(projets[k].statutProjet==1) {%>
-																							<button onclick="location.href='/<%= chemin %><%= projets[k].idProjet %>'" class="btn btn-lg btn-warning" style="width:100%;" type="button">Editer</button>
+																							<button onclick="location.href='/<%= chemin %><%= projets[k].idProjet %>'" class="btn btn-lg btn-warning" style="width:100%;" type="button"><span class="glyphicon glyphicon-edit"></span> Editer</button>
 																						<%}else{%>
-																							<button type="button" class="btn btn-success" style="width:50%;">Valider</button>
-																							<button type="button" class="btn btn-danger" style="width:50%;">Rejeter</button>
+																							<button type="button" class="btn btn-success" style="width:50%;"><span class="glyphicon glyphicon-ok"></span> Valider</button>
+																							<button type="button" class="btn btn-danger" style="width:50%;"><span class="glyphicon glyphicon-remove"></span> Rejeter</button>
 																						<%}%>
 																						</div>
 																					</div>

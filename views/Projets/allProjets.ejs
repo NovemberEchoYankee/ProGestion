@@ -76,13 +76,20 @@
 																	<% if(projets[k].initiativeEtudianteProjet==1) {%>
 																		<div class="col-md-4">
 																			<div class="card mb-4 shadow-lg" style="background-color: rgb(63,63,63); color:white;">
-																				<img class="card-img-top" src="../files/team_work_image2.jpg" alt="Card image cap">
+																				<img class="card-img-top" src="/files/team_work_image2.jpg" alt="Card image cap">
 																				<div class="card-body">
-																					<h2><%=projets[k].nomProjet %> </h2><button onclick="confirmBeforeDelete('<%= projets[k].idProjet %>', '<%= chemin %>')" class="btn btn-lg btn-danger" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
+																					<h2><%=projets[k].nomProjet %> </h2>
+																					<a href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= projets[k].idProjet %>', '<%= chemin %>')" class="btn btn-lg btn-danger" type="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
 																					<p class="card-text"><%=projets[k].descriptionProjet %></p>
 																					<% fonctionnaliteProjet = projets[k].fonctionnaliteProjet %>
 																					<p class="card-text">Fonctionnalités : <%= fonctionnaliteProjet %></p>
-																					<p class="card-text">Membre : <%= projets[k].nomU %></p>
+																					<p class="card-text">Membre :</br>
+																					<% for(var l=0; l<=etudiants.length-1; l++) { %>
+																						<% if(etudiants[l].groupeU == projets[k].idG){%>
+																							<%= etudiants[l].nomU + " " + etudiants[l].prenomU %></br>
+																						<%}%>
+																					<%}%>
+																					</p>
 																					<small class="text-muted">9 mins</small>
 																					<div class="d-flex justify-content-between align-items-center">
 																						<div class="btn-group btn-group-lg" style="width:100%;">
@@ -91,7 +98,7 @@
 																							<button onclick="location.href='/<%= chemin %><%= projets[k].idProjet %>'" class="btn btn-lg btn-warning" style="width:100%;" type="button"><span class="glyphicon glyphicon-edit"></span> Editer</button>
 																					
 																						<%}else{%>
-																							<button type="button" class="btn btn-success" style="width:50%;"><span class="glyphicon glyphicon-ok"></span> Valider</button>
+																							<a href="/<%= chemin %>" onclick="validate('<%= projets[k].idProjet %>', '<%= chemin %>')" class="btn btn-success"  style="width:50%;" type="button"><i class="glyphicon glyphicon-ok" aria-hidden="true"></i> Valider</a>
 																							<button type="button" class="btn btn-danger" style="width:50%;"><span class="glyphicon glyphicon-remove"></span> Rejeter</button>
 																						<%}%>
 																						</div>
@@ -112,20 +119,27 @@
 																	<% if(projets[k].initiativeEtudianteProjet==0) {%>
 																		<div class="col-md-4">
 																			<div class="card mb-4 shadow-lg" style="background-color: rgb(63,63,63); color:white;">
-																				<img class="card-img-top" src="../files/team_work_image2.jpg" alt="Card image cap">
+																				<img class="card-img-top" src="/files/team_work_image2.jpg" alt="Card image cap">
 																				<div class="card-body">
-																					<h2><%=projets[k].nomProjet %></h2><button onclick="confirmBeforeDelete('<%= projets[k].idProjet %>', '<%= chemin %>')" class="btn btn-lg btn-danger" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
+																					<h2><%=projets[k].nomProjet %></h2>
+																					<a href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= projets[k].idProjet %>', '<%= chemin %>')" class="btn btn-lg btn-danger" type="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
 																					<p class="card-text"><%=projets[k].descriptionProjet %></p>
 																					<% fonctionnaliteProjet = projets[k].fonctionnaliteProjet.replace(/<br[^>]*>/gi, "\n"); %>
 																					<p class="card-text">Fonctionnalités : <%= fonctionnaliteProjet %></p>
-																					<p class="card-text">Membre : <%= projets[k].nomU %></p>
+																					<p class="card-text">Membre :</br>
+																					<% for(var l=0; l<=etudiants.length-1; l++) { %>
+																						<% if(etudiants[l].groupeU == projets[k].idG){%>
+																							<%= etudiants[l].nomU + " " + etudiants[l].prenomU %></br>
+																						<%}%>
+																					<%}%>
+																					</p>
 																					<small class="text-muted">9 mins</small>
 																					<div class="d-flex justify-content-between align-items-center">
 																						<div class="btn-group btn-group-lg" style="width:100%;">
 																						<% if(projets[k].statutProjet==1) {%>
 																							<button onclick="location.href='/<%= chemin %><%= projets[k].idProjet %>'" class="btn btn-lg btn-warning" style="width:100%;" type="button"><span class="glyphicon glyphicon-edit"></span> Editer</button>
 																						<%}else{%>
-																							<button type="button" class="btn btn-success" style="width:50%;"><span class="glyphicon glyphicon-ok"></span> Valider</button>
+																							<a href="/<%= chemin %>" onclick="validate('<%= projets[k].idProjet %>', '<%= chemin %>')" class="btn btn-success"  style="width:50%;" type="button"><i class="glyphicon glyphicon-ok" aria-hidden="true"></i> Valider</a>
 																							<button type="button" class="btn btn-danger" style="width:50%;"><span class="glyphicon glyphicon-remove"></span> Rejeter</button>
 																						<%}%>
 																						</div>
@@ -156,7 +170,13 @@
 																				<% numProjet++;%>
 																				<tr>
 																					<th class="align-middle" style="text-align: center" scope="row"><%= numProjet %></th>
-																					<td class="align-middle"><%= projets[k].nomU %></td>
+																					<td class="align-middle">
+																					<% for(var l=0; l<=etudiants.length-1; l++) { %>
+																						<% if(etudiants[l].groupeU == projets[k].idG){%>
+																							<%= etudiants[l].nomU + " " + etudiants[l].prenomU %></br>
+																						<%}%>
+																					<%}%>
+																					</td>
 																					<td class="align-middle"><%= projets[k].nomProjet %></td>
 																					<% if(projets[k].statutProjet == 0){%>
 																						<td class="align-middle nonValide" style="text-align: center"><strong><%= projets[k].statutProjet %></strong></td>

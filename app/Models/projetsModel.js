@@ -12,19 +12,18 @@ var Projet={
 	
 	ObtAllProjets:function(callback)
     {	
-		return connection.query("select pr.*, m.nomM, m.promotionM, p.nomP, u.nomU "
+		return connection.query("select pr.*, m.nomM, m.promotionM, p.nomP, g.idG "
 		+ "from projet pr "
 		+ "inner join matiere m ON pr.matiereProjet=m.idM "
 		+ "inner join promotion p on m.promotionM=p.idP "
 		+ "left join groupe g on pr.idProjet=g.projetG "
-		+ "left join users u on g.idG=u.groupeU "
 		+ "Order by pr.idProjet ASC", callback);
 	},
+
 
     ObtProjetId:function(id, callback) {
         return connection.query("select * from projet where idProjet=?", [id], callback)
     },
-
 
     PostProjet: function(nom, description, fonctionnalite, statut, matiere, initiativeEtudiante, callback){
         return connection.query("INSERT INTO projet (nomProjet, descriptionProjet, fonctionnaliteProjet, statutProjet, matiereProjet, initiativeEtudianteprojet) values (?,?,?,?,?,?)", [nom, description, fonctionnalite, statut, matiere, initiativeEtudiante], callback);
@@ -32,6 +31,10 @@ var Projet={
 	
     PutProjetId:function(id, nomP, descriptionP, fonctionnaliteP, matiereP, callback) {
         return connection.query("update projet SET nomProjet=?, descriptionProjet=?, fonctionnaliteProjet=?, matiereProjet=? where idProjet=?", [nomP, descriptionP, fonctionnaliteP, matiereP, id], callback)
+    },
+	
+	PutValideProjetId:function(id, callback) {
+        return connection.query("update projet SET statutProjet=1 where idProjet=?", [id], callback)
     },
 	
 		/*
@@ -80,7 +83,7 @@ var Projet={
         return connection.query("delete from projet where idProjet=?", [id])
     },
 
-    DelProjetByMatiere : function (id) {
+    DelProjetByMatiere:function(id) {
         return connection.query("delete from projet where matiereprojet=?", [id])
     }
 

@@ -148,14 +148,26 @@ router.get('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "E
 					console.log(data2.table1);
                     parallel_done();
                 });
-            },
+            },	
 			function(parallel_done) {
                 var query3 = Projet.ObtAllProjets(function (err, rows3) {
                     if (err)
+					{
                         res.status(500).render('errorRequest.ejs', {page_title:"Error Pr", role:req.user.roleU, ressource: "/enseignant/projet"});
-
-                    data2.table2 = rows3;
-					console.log(data2.table2);
+					}	
+					data2.table2 = rows3;
+					console.log(data2.table2);	
+                    parallel_done();
+                });
+            },	
+			function(parallel_done) {
+                var query4 = User.ObtAllEtudiants(function (err, rows4) {
+                    if (err)
+					{
+                        res.status(500).render('errorRequest.ejs', {page_title:"Error Pr", role:req.user.roleU, ressource: "/enseignant/projet"});
+					}	
+					data2.table3 = rows4;
+					console.log(data2.table3);	
                     parallel_done();
                 });
             }
@@ -163,7 +175,7 @@ router.get('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "E
             if(err)
                 res.status(500).render('errorRequest.ejs', {page_title:"Error A", role:req.user.roleU, ressource: "/enseignant/projet"});
             else
-                res.status(200).render('Projets/allProjets.ejs',{page_title:"allProjets", matieres:data2.table, promos:data2.table1, projets:data2.table2, chemin:"enseignant/projet/"});
+                res.status(200).render('Projets/allProjets.ejs',{page_title:"allProjets", matieres:data2.table, promos:data2.table1, projets:data2.table2, etudiants:data2.table3, chemin:"enseignant/projet/"});
         });
     }
 });
@@ -191,45 +203,47 @@ router.post('/projet',function(req, res, next){ CheckLog(req, res, next, "ENSEIG
 //Modifier projet
 router.put('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
 {
-    if (req.param("id"))
-    {
-        var nomP = req.body.nom;
-        var descriptionP = req.body.description;
-        var fonctionnaliteP = req.body.fonctionnalite;
+	if(req.param("id")) {
+		var nomP = req.body.nom;
+		var descriptionP = req.body.description;
+		var fonctionnaliteP = req.body.fonctionnalite;
 		var matiereP = req.body.matiere;
 		
 		console.log(descriptionP);
 		console.log(matiereP);
 		
-        var query = Projet.PutProjetId(req.param("id"), nomP, descriptionP, fonctionnaliteP, matiereP, function (err, rows) {
-            if (err)
-                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/projet"}+ req.param("id"));
-        });
-    }
+		var query = Projet.PutProjetId(req.param("id"), nomP, descriptionP, fonctionnaliteP, matiereP, function (err, rows) {
+			if (err)
+				res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/projet"}+ req.param("id"));
+		});
+	}
+});
+
+//Modifier statut projet à 1
+router.put('/projet/validate/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
+{
+	if(req.param("id")) {
+		var query = Projet.PutValideProjetId(req.param("id"), function (err, rows) {
+			if (err)
+				res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/projet"}+ req.param("id"));
+			else
+            res.status(200).redirect('/enseignant/projet');
+		});
+	}
 });
 
 //Supprimer projet
 router.delete('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
 {
     if(req.param("id")) {
-        async.parallel([
-            function(parallel_done) {
+		var query = Projet.DelProjetId(req.param("id"), function (err, rows) {
+			if (err)
+				res.status(500).render('errorRequest.ejs', {
+					page_title: "Error", role:req.user.roleU,
+					ressource: "/enseignant/projet"
+				} + req.param("id"));
+		});
 
-                var query = Projet.DelProjetId(req.param("id"), function (err, rows) {
-                    if (err)
-                        res.status(500).render('errorRequest.ejs', {
-                            page_title: "Error", role:req.user.roleU,
-                            ressource: "/enseignant/projet"
-                        } + req.param("id"));
-
-                    parallel_done();
-
-                });
-            }
-            ], function(err){
-                    if(err)
-                        res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/projet"});
-        });
     }
 });
 

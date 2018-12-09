@@ -77,6 +77,14 @@ function deleteItem(idItem, chemin) {
     });
 }
 
+//Valide le projet
+function validate(idItem, chemin) {
+	$.ajax({
+		url:"http://localhost:8080/"+chemin+"validate/"+idItem,
+		type: 'put',
+    });
+}
+
 function modifyItem(idItem, chemin) {
     $.ajax({
         //url: "http://qrcode.guillaumeperes.fr/"+chemin+idItem,

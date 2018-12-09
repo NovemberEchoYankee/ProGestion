@@ -165,6 +165,7 @@ router.post('/matieres',function(req, res, next){ CheckLog(req, res, next, "ADMI
     });
 });
 
+//Modifier projet
 router.put('/matieres/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
 {
     if (req.param("id"))
@@ -180,7 +181,7 @@ router.put('/matieres/:id?', function(req, res, next){ CheckLog(req, res, next, 
     }
 });
 
-
+//Supprimer matiere
 router.delete('/matieres/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
 {
     if(req.param("id")) {

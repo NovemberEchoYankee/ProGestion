@@ -85,7 +85,7 @@
 																					<p class="card-text">Fonctionnalités : <%= fonctionnaliteProjet %></p>
 																					<p class="card-text">Membre :</br>
 																					<% for(var l=0; l<=etudiants.length-1; l++) { %>
-																						<% if(etudiants[l].groupeU == projets[k].idG){%>
+																						<% if(etudiants[l].id == projets[k].etudiantG){%>
 																							<%= etudiants[l].nomU + " " + etudiants[l].prenomU %></br>
 																						<%}%>
 																					<%}%>

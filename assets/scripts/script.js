@@ -54,6 +54,7 @@ function formUserOK (idItem, chemin) {
     }
 }
 
+//Message de confirmation avant l'appel à la méthode deleteItem (ci-dessous)
 function confirmBeforeDelete(idItem, chemin) {
     var txt;
     var r = confirm("Attention, supprimer cet élément entrainera la suppression des éléments associés.");
@@ -70,6 +71,7 @@ function confirmBeforeDeleteAdmin(idItem, chemin) {
     }
 }
 
+//Appel la méthode Delete pour supprimer la ressource contenu dans le chemin de l'URL
 function deleteItem(idItem, chemin) {
 	$.ajax({
 		url:"http://localhost:8080/"+chemin+idItem,
@@ -77,11 +79,19 @@ function deleteItem(idItem, chemin) {
     });
 }
 
-//Valide le projet
+//Valide le projet en appellant la méthode put (validate)
 function validate(idItem, chemin) {
 	$.ajax({
 		url:"http://localhost:8080/"+chemin+"validate/"+idItem,
 		type: 'put',
+    });
+}
+
+//Postule à un projet en appellant la méthode post (postule)
+function postuler(idItem, chemin) {
+	$.ajax({
+		url:"http://localhost:8080/"+chemin+"postule/"+idItem,
+		type: 'post',
     });
 }
 
@@ -94,6 +104,7 @@ function modifyItem(idItem, chemin) {
     });
 }
 
+//Valide le projet en appellant la méthode put (validate)
 function CachePromo() {
     var x = document.getElementById("role").value;
     if(x=="ENSEIGNANT" || x=="ADMINISTRATION")

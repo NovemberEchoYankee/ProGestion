@@ -17,7 +17,7 @@ var Users={
     },
 
     ObtUserId:function(id, callback) {
-        return connection.query("select * from users where id=? Order by nomU, prenomU ASC", [id], callback)
+        return connection.query("select u.*, p.nomP from users u LEFT JOIN promotion p ON u.promotionU=p.idP where u.id=? Order by nomU, prenomU ASC", [id], callback)
     },
 
     PutUserId:function(id, username, password, nom, prenom, mail, promo, callback) {

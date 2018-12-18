@@ -7,11 +7,12 @@ var CheckLog = require('../CheckLogin');
 var router = require('express').Router();
 var moment = require('moment');
 var async = require('async');
+
 // =====================================
 // ENSEIGNANT ==========================
 // =====================================
 
-// Si chemin/create alors creerProjet sinon éditer sinon afficher
+// Si chemin/create alors envoyer vers creerProjet sinon vers éditer sinon afficher
 router.get('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
 {
 	var data = {};
@@ -200,7 +201,7 @@ router.post('/projet',function(req, res, next){ CheckLog(req, res, next, "ENSEIG
     });
 });
 
-//Modifier projet
+//Modifier projet (nom, description, fonctionnalite et la matiere)
 router.put('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
 {
 	if(req.param("id")) {
@@ -247,6 +248,7 @@ router.delete('/projet/:id?', function(req, res, next){ CheckLog(req, res, next,
     }
 });
 
+//Afficher le profil
 router.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
     res.status(200).render('profile.ejs', { user : req.user });
 });

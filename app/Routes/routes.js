@@ -24,7 +24,7 @@ module.exports = function(app, passport) {
 		})(req, res	);
 	});
 
-    // après envoi du formulaire login, redirectByRole redirige le profil actif vers la page correposdant à son role
+    // après envoi du formulaire login, redirectByRole redirige le profil actif vers la page correspondant à son role
     app.get('/redirectByRole', function(req, res) {
 
     	switch(req.user.roleU){

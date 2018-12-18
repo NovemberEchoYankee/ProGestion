@@ -13,7 +13,7 @@ module.exports = function(passport) {
 
     // utilisé pout deserealizer l'utilisateur pour la session
     passport.deserializeUser(function(id, done) {
-        connection.query("SELECT * FROM users WHERE id = ? ",[id], function(err, rows){
+        connection.query("SELECT u.*, p.nomP FROM users u LEFT JOIN promotion p ON u.promotionU=p.idP WHERE id = ? ",[id], function(err, rows){
             done(err, rows[0]);
         });
     });
@@ -38,7 +38,7 @@ module.exports = function(passport) {
             // le username est construit à partir du nom et du prénom de l'utilisateur
             // idem pour le mot de passe
 
-            connection.query("SELECT * FROM users WHERE mailU = ?",[mail], function(err, rows) {
+            connection.query("SELECT u.*, p.nomP FROM users promotion p ON u.promotionU=p.idP WHERE mailU = ?",[mail], function(err, rows) {
                 if (err)
                     return done(err);
                 if (rows.length)
@@ -99,7 +99,7 @@ module.exports = function(passport) {
             passReqToCallback : true
         },
         function(req, username, password, done) {
-            connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows){
+            connection.query("SELECT u.*, p.nomP FROM users u LEFT JOIN promotion p ON u.promotionU=p.idP WHERE username = ?",[username], function(err, rows){
 
                 if (err)
                     return done(err);

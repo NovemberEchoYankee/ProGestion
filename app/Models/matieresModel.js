@@ -30,6 +30,16 @@ var Matiere={
 		+ "where enseignantM=? "
 		+ "Order by m.nomM", [idEnseignant], callback);
     },
+	
+	ObtMatieresEtudiant:function(idEtudiant, callback)
+    {
+        return connection.query("select m.*, p.nomP, u.nomU, u.prenomU "
+		+ "from matiere m "
+		+ "inner join promotion p on m.promotionM=p.idP "
+		+ "inner join users u ON m.promotionM=u.promotionU "
+		+ "where u.id=? "
+		+ "Order by m.nomM", [idEtudiant], callback);
+    },
 
     ObtMatiereId:function(id, callback)
     {

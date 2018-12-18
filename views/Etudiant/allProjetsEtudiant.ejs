@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Les projets</title>
+        <% include ../layout %>
+		<style>
+			#MainMenu{
+				width:100%;
+			}
+			table{
+				font-size:14px;
+			}
+			 .valide{
+				color:white;
+				background-color: #28A745;
+			 }
+			 .nonValide{
+				color:white;
+				background-color: #DC3545;
+			 }
+			 .valide:hover{
+				background-color: #218838;
+			 }
+			 .nonValide:hover{
+				background-color: #C82333;
+			 }
+		</style>
+    </head>
+    <body>
+		<div class="wrapper">
+			<% include ../Menus/MenuEtudiant %>
+			<!-- Page Content  -->
+			<div id="content">
+				<div class="container">
+				<span class="pull-left"><h1 class="pull-left">Les projets </h1></span>
+				</div>
+				<div class="container">
+					<div class="list-group panel">						
+						<ul class="nav nav-tabs">
+							<% for(var i=0; i<=matieres.length-1; i++) { %>
+								<li  <% if(i == 1){ %>class="active"<% } %> ><a href="#<%= matieres[i].nomM.replace(/ /g, "") %>" data-toggle="tab" ><%= matieres[i].nomM.replace(/ /g, "") %></a></li>
+							<% } %>
+						</ul>
+						<!-- ************************************************************** -->					
+						<div class="tab-content">
+							<% for(var i=0; i<=matieres.length-1; i++) { %>
+								<div id="<%= matieres[i].nomM.replace(/ /g, "") %>" class="tab-pane fade in  <% if(i == 1){ %>class="active"<% } %>" >		
+									<% if(projets.length !=0) { %>
+										<% var numProjet = 0;%>
+										<!-- ********************************************************************************** -->
+										<!-- ********************************************************************************** -->
+										<div class="container">
+											<span class="pull-left"><h1 class="pull-left">projets :</h1></span>
+										</div>	
+										<div class="row">
+											<% for(var k=0; k<=projets.length-1; k++) { %>
+												<% if(matieres[i].idM == projets[k].matiereProjet){%>
+													<% if(projets[k].initiativeEtudianteProjet==0 && projets[k].statutProjet==1) {%>
+														<div class="col-md-4">
+															<div class="card mb-4 shadow-lg" style="background-color: rgb(63,63,63); color:white;">
+																<img class="card-img-top" src="/files/team_work_image2.jpg" alt="Card image cap">
+																<div class="card-body">
+																	<h2><%=projets[k].nomProjet %> </h2>
+																	<p class="card-text"><%=projets[k].descriptionProjet %></p>
+																	<% fonctionnaliteProjet = projets[k].fonctionnaliteProjet %>
+																	<p class="card-text">Fonctionnalités : <%= fonctionnaliteProjet %></p>
+																	<p class="card-text">Membre :</br>
+																	<% for(var l=0; l<=etudiants.length-1; l++) { %>
+																		<% if(etudiants[l].groupeU == projets[k].idG){%>
+																			<%= etudiants[l].nomU + " " + etudiants[l].prenomU %></br>
+																		<%}%>
+																	<%}%>
+																	</p>
+																	<small class="text-muted">9 mins</small>
+																	<div class="d-flex justify-content-between align-items-center">
+																		<div class="btn-group btn-group-lg" style="width:100%;">		
+																			<a href="/<%= chemin %>" onclick="postuler('<%= projets[k].idProjet %>', '<%= chemin %>')" class="btn btn-info"  style="width:100%;" type="button"><i class="glyphicon glyphicon-hand-right" aria-hidden="true"></i> Postuler</a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													<%}%>
+												<%}%>
+											<%}%>
+											<div class="col-md-4">
+												<div class="card mb-4 shadow-lg" style="background-image: url('/files/team_work_image2.jpg'); background-size: cover; color:white; width:100%; height:100%, text-align:center;">
+													<div class="card-body">
+														<span class="pull-left"><a class="btn btn-success btn-lg" href="/<%= chemin %>create" role="button"><span class="glyphicon glyphicon-plus"></span> Créer un projet !</a></span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- ********************************************************************************** -->
+										<!-- ********************************************************************************** -->
+									<% }%>
+									<% if(projets.length == 0) { %>
+										<div class="list-group-item">
+											<div class="container">
+												<div class="col-md-9">
+													<div>Il n'y a pas de projet pour cette matière.</div>
+												</div>
+											</div>
+										</div>
+									<% } %>
+								</div>
+							<% } %>
+						</div>
+						<!-- ************************************************************** -->              
+					</div>
+				</div>
+			</div>
+		</div>
+    </body>
+</html>

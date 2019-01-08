@@ -13,9 +13,12 @@ Existant :
 * None
 
 Fonctionnalités faites :
-* Import CSV pour inscrire des étudiants/enseignants --> B1.2
-* Mise à jour du visuel (tableau, liste, ...)
-* Génération PDF de la feuille de présence et envoie par mail --> B1.3
+* Gestion des ressources de l'application [Admin]
+* Inscription étudiante [Etudiant]
+* Création de projet [Etudiant, Enseignant]
+* Suppression de projet [Enseignant]
+* Modification de projet [Enseignant, Etudiant]
+* Création groupe projet [Etudiant]
 
  Un administrateur créé les enseignants qui auront accès à l'application, il peut gérer les utilisateurs.
  Il peut créer aussi des promotions, des matières.

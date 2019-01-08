@@ -1,17 +1,19 @@
 var connection=require('../../config/dbconnection');
 
-var Etudiant={
+var Enseignant={
 
     /*ObtAllPromos:function(callback)
     {
         return connection.query("select * from promotion", callback);
     },*/
 
+	//Récupérer un étudiant grâce à son ID
     ObtEtuId:function(id, callback)
     {
         return connection.query("select * from seance where idS=?", [id], callback);
     },
 	
+	//Récupérer les projets de l'étudiant grâce à la matiere, à revoir !
 	ObtProjetsByMatiere:function(id, matiere)
 	{
 		return connection.query("select * from projet where matiereProjet = m.idM ")
@@ -26,4 +28,4 @@ var Etudiant={
     }*/
 
 };
-module.exports=Etudiant;
+module.exports=Enseignant;

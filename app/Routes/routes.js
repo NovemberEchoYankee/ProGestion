@@ -8,11 +8,37 @@ module.exports = function(app, passport) {
 	// =====================================
 
 	app.get('/', function(req, res) {
-        res.status(200).render('login.ejs', { message: req.flash('loginMessage') });
+		var query = Promo.ObtAllPromos(function (err, rows) {
+            if (err)
+			{
+				res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/login"});
+				return false;
+            }
+             if(rows.length<=0)
+             {
+                 res.status(404).render('errorRessource.ejs', {page_title:"Error", ressource:"/login"});
+                 return false;
+             }
+			 console.log(rows);
+            res.status(201).render('login.ejs', {page_title:"createUser", promos:rows, message: req.flash('loginMessage'), chemin:"/login"});
+        });
 	});
 
 	app.get('/login', function(req, res) {
-		res.status(200).render('login.ejs', { message: req.flash('loginMessage') });
+		var query = Promo.ObtAllPromos(function (err, rows) {
+            if (err)
+			{
+				res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/login"});
+				return false;
+            }
+             if(rows.length<=0)
+             {
+                 res.status(404).render('errorRessource.ejs', {page_title:"Error", ressource:"/login"});
+                 return false;
+             }
+			 console.log(rows);
+            res.status(201).render('login.ejs', {page_title:"createUser", promos:rows, message: req.flash('loginMessage'), chemin:"/login"});
+        });
 	});
 
 	app.post('/login', function(req, res) {
@@ -40,6 +66,23 @@ module.exports = function(app, passport) {
 		}
         res.status(200).redirect(returnTo);
     });
+	
+	app.post('/signup', function(req, res) {
+		var username= req.body.prenom.substring(0, 2).toLowerCase() + req.body.nom.substring(0, 4).toLowerCase();
+        var password= bcrypt.hashSync(req.body.prenom.substring(0, 2).toLowerCase() + req.body.nom.substring(0, 4).toLowerCase(), null, null);  // use the generateHash function in our user model
+        var nomU = req.body.nom.toUpperCase();
+        var prenomU = req.body.prenom.charAt(0).toUpperCase() + req.body.prenom.slice(1);
+        var mailU = req.body.mail;
+        var roleU = "ETUDIANT";
+        var promotionU = req.body.promotion;
+
+		var query = User.AddUser(username, password, prenomU, nomU, mailU, roleU, promotionU, function (err, rows) {
+			if (err)
+				console.log("erreur lors de l'inscription");
+
+			res.status(200).redirect('/login');
+		});
+	});
 
 	app.get('/admin/users/create', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res) {
         var query = Promo.ObtAllPromos(function (err, rows) {

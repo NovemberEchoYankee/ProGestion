@@ -85,9 +85,22 @@
 									</div>
 								</div>
 							</form>
-							<form id="register-form" action="/" method="post" role="form" style="display: none;">
+							<form id="register-form" action="/signup" method="post" role="form" style="display: none;">
 								<div class="form-group">
-									<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+									<input type="text" name="nom" id="nom" tabindex="1" class="form-control" placeholder="Nom" value="">
+								</div>
+								<div class="form-group">
+									<input type="text" name="prenom" id="prenom" tabindex="1" class="form-control" placeholder="Prenom" value="">
+								</div>
+								<div class="form-group">
+									<input type="text" name="mail" id="mail" tabindex="1" class="form-control" placeholder="Mail" value="">
+								</div>
+								<div class="form-group">
+									<select name="promotion">
+										<% for(var i=0; i<promos.length; i++) { %>
+										<option value="<%=promos[i].idP%>" ><%=promos[i].nomP%></option>
+										<% } %>
+									</select>
 								</div>
 								<div class="form-group">
 									<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">

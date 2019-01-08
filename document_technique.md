@@ -361,10 +361,10 @@ Cette route sert a générer le PDF sur le serveur. Route accessible uniquement 
 ## Technologies utilisées : 
 
 Afin de réaliser ce projet nous avons travailler avec divers technologies qui nous ont permis de mener à bien ce projet :
-* Nous avons utilisés l'outil **IntelliJ IDEA** qui nous a permis de développer et de faciliter les intéractions avec le serveur
+* Nous avons utilisés l'outil **Notepad++** pour l'IDE.
 * Afin de garder un oeil sur les changements dans Github, nous avons utilisé l'outil **SmartGit** 
 * Nous nous sommes servi de **EasyPHP** et de **PHPMyAdmin** en tant que serveur et de database
-* Pour pouvoir communiquer entre nous, nous avons utilisé divers outils comme **Slack** ou **Discord** mais aussi **Asana** qui nous 
+* Pour pouvoir communiquer entre nous, nous avons utilisé divers outils comme **Discord**, **Whatsapp** mais aussi **Trello** qui nous 
 a permis de faire un suivi de projet complet
 * Nous avons développé ce projet sous **NodeJS** et **EJS**, et nous nous sommes servi de **SQL** afin d'écrire les différentes requètes
 * Enfin nous avons utilisé **Boostrap** afin de donner du style à notre site

@@ -17,6 +17,10 @@ La dématérialisation de ce processus permettra à l'enseignant de gagner du te
 
 ## Architecture
 
+Ci-après le schéma de la base de données : 
+  
+![Base de données](bdd_progestion.png)
+
 ## Maquette des écrans
 
 ## Descriptions des champs

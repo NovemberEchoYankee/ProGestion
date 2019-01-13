@@ -26,3 +26,10 @@ Fonctionnalités faites :
  Un enseignant peut créer des projets dit "initiative enseignante", il peut valider des projets dit "initiative étudiante".
  
  Un étudiant peut s'inscrire sur un projet existant et il a la possibilité d'en créer un.
+
+
+## Architecture
+
+Ci-après le schéma de la base de données : 
+  
+![Base de données](bdd_progestion.PNG)

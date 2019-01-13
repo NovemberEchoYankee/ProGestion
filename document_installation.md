@@ -31,6 +31,14 @@ Ci-après la maquette de la gestion des users :
   
 ![Connexion](page_admin_users_progestion.png)
 
+Ci-après la maquette de la gestion des projets par l'enseignant : 
+  
+![Connexion](page_enseignante_gestion_projets_progestion.png)
+
+Ci-après la maquette de la gestion des projets par l'étudiant : 
+  
+![Connexion](page_etudiant_gestion_projets_progestion.png)
+
 ## Descriptions des champs
 
 ## Tableau des messages d'erreurs

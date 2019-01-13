@@ -23,6 +23,14 @@ Ci-après le schéma de la base de données :
 
 ## Maquette des écrans
 
+Ci-après la maquette de la connexion : 
+  
+![Connexion](page_connexion_progestion.png)
+
+Ci-après la maquette de la gestion des users : 
+  
+![Connexion](page_admin_users_progestion.png)
+
 ## Descriptions des champs
 
 ## Tableau des messages d'erreurs

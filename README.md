@@ -33,3 +33,13 @@ Fonctionnalités faites :
 Ci-après le schéma de la base de données : 
   
 ![Base de données](bdd_progestion.PNG)
+
+## Maquette des écrans
+
+Ci-après la maquette de la connexion : 
+  
+![Connexion](page_connexion_progestion.png)
+
+Ci-après la maquette de la gestion des users : 
+  
+![Connexion](page_admin_users_progestion.png)

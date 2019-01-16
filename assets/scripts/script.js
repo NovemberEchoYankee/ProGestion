@@ -96,7 +96,7 @@ function postuler(idItem, chemin) {
     });
 }
 
-Appel la méthode PUT pour modifier la ressource contenu dans le chemin de l'URL
+//Appel la méthode PUT pour modifier la ressource contenu dans le chemin de l'URL
 function modifyItem(idItem, chemin) {
     $.ajax({
         //url: "http://qrcode.guillaumeperes.fr/"+chemin+idItem,

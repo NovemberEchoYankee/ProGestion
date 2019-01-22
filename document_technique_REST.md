@@ -1,4 +1,4 @@
-# Documentation technique : 
+# Documentation technique REST: 
 
 ## ROUTES /enseignant :
 
@@ -120,7 +120,9 @@ Permet à l’administrateur de supprimer un utilisateur.
 
 **GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/promosRoute.js 
 ```js
-router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next, "ADMINISTRATION");},function(req, res)
+router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next, "ADMINISTRATION");},function(req, res) {
+	...
+});
 ```
 Renvoi toutes les promotions contenues dans la base de données et les affichent sous forme de groupes triés par promotion.
 

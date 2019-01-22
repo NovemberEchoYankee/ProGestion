@@ -1,38 +1,46 @@
-# Documentation technique : 
+# Documentation technique REST: 
 
 ## ROUTES /enseignant :
 
 **GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js  
 ```js
-router.get('/seance', function(req, res, next) {CheckLog(req, res, next, "ENSEIGNANT");},function(req, res){
-    FactoryEnseignant(req, res, 'Enseignant/validerPresence.ejs');
+router.get('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res){
+    ...
 });
 ```
-Requête qui renvoie la vue contenant les informations nécessaires pour l’enseignant, ici l’enseignant pourra consulter la vue 
-de la fiche de présence en question (séance).
+Requête qui renvoie la vue contenant tous les projets étudiants ou enseignant. Si un id est spécifier alors renvoie la vue modification du projet.
 
-**GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
+**POST** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
 ```js
-router.get('/listEtuStandard', function(req, res, next) {CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
-    FactoryEnseignant(req, res, 'Enseignant/listEtuStandard.ejs');
+router.post('/projet',function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res){
+	...
 });
 ```
-Revoi la liste des étudiants de façon standard.
-
-**GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
-```js
-router.get('/listEtuTrombinoscope', function(req, res, next) {CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
-    FactoryEnseignant(req, res, 'Enseignant/listEtuTrombinoscope.ejs');
-});
-``` 
-Renvoi la liste des étudiants sous forme de trombinoscope. 
+Requête qui créée un projet par initiative enseignante.
 
 **PUT** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
 ```js
-router.put('/seance/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
+router.put('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res){
+    ...
+});
+``` 
+Requête qui modifie un projet avec tous ses paramêtres
+
+**PUT** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
+```js
+router.put('/projet/validate/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res){
+    ...
+});
 ```
-Permet à l’enseignant de valider une séance afin de notifier sa présence lors d'un cours. Il peut aussi émettre un commentaire en même 
-temps.
+Permet à l’enseignant de valider un projet étudiant afin que celui ci apparaisse dans les projets validés. 
+
+**DELETE** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
+```js
+router.delete('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res){
+    ...
+});
+```
+Requête qui va supprimer un projet de la base de données.
 
 **GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
 ```js
@@ -40,73 +48,81 @@ router.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ENSEI
     res.status(200).render('profile.ejs', { user : req.user });
 });
 ```
-Renvoi vers la page profile de l'enseignant connecté.
-
-**GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
-```js
-router.get('/edtJournee', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
-```
-Renvoi l'emploi du temps de la journée de l'enseignant connecté.
+Renvoi le profil de l'enseignant
 
 ## ROUTES /etudiant :
 
 **GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/etudiantRoutes.js
 ```js
-router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "ETUDIANT");},function(req, res) {
+router.get('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res){
+	...
+});
 ```
-Requête qui renvoie la vue contenant les informations nécessaire à l’étudiant, ici il aura accès à la vue qui lui permettra de signer 
-la fiche de présence.
+Requête qui renvoie la vue contenant les projets par matière, si un id est spécifié redirection vers la vue modification, si url = create redirection vers la vue création projet
 
 **POST** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/etudiantRoutes.js
 ```js
-router.post('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "ETUDIANT");},function(req, res) {
+router.post('/projet',function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res){
+	...
+});
 ```
-Permet à l’édutiant de modifier une séance afin de valider sa présence lors de cette même séance. Cette route va créer un badge reliant
-l'id de l'étudiant à l'id de la séance.
+Requête qui créée un projet d'initiative étudiante.
+
+**POST** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/etudiantRoutes.js
+```js 
+router.post('/projet/postule/:id?', function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res){
+	...
+});
+```
+Requête qui créée un groupe projet avec idEtudiant et idProjet
 
 **GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/etudiantRoutes.js
-```js 
+```js
 router.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res) {
     res.status(200).render('profile.ejs', { user : req.user });
 });
 ```
-Renvoi vers la page profile de l'étudiant connecté.
-
-**GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/etudiantRoutes.js
-```js
-router.get('/edtJournee', function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res)
-```
-Renvoi l'emploi du temps de la journée de l'étudiant connecté.
+Renvoi le profil de l'enseignant
 
 ## ROUTES /admin :
 
 **GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/matieresRoute.js 
 ```js
-router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, "ADMINISTRATION");},function(req, res) {
+router.get('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res){
+	...
+});
 ```
-Renvoie toutes les matières contenues dans la base de données et les affichent sous forme de groupes triés par promotion.
+Renvoie toutes les utilisateurs contenues dans la base de données et les affichent sous forme de groupes triés par promotion.
 
 **POST** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/matieresRoute.js
 ```js
-router.post('/matieres',function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+router.post('/createUser', function(req, res) {
+	...
+});
 ```
-Route qui permet à l’administrateur de créer une nouvelle matière en fonction d’une promotion déjà existante.
+Route qui permet à l’administrateur de créer un nouvel utilisateur, si étudiant choisir une promotion.
 
 **PUT** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/matieresRoute.js
 ```js
-router.put('/matieres/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+router.put('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res){
+	...
+});
 ```
-Route qui permet à l’administrateur de modifier une matière déjà existante et permet de changer celle-ci de promotion.
+Route qui permet à l’administrateur de modifier un utilisateur
 
 **DELETE** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/matieresRoute.js
 ```js
-router.delete('/matieres/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+router.delete('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res) {
+	...
+});
 ```
-Permet à l’administrateur de supprimer une matière.
+Permet à l’administrateur de supprimer un utilisateur.
 
 **GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/promosRoute.js 
 ```js
-router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next, "ADMINISTRATION");},function(req, res)
+router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next, "ADMINISTRATION");},function(req, res) {
+	...
+});
 ```
 Renvoi toutes les promotions contenues dans la base de données et les affichent sous forme de groupes triés par promotion.
 
@@ -218,25 +234,6 @@ app.get('/redirectByRole', function(req, res) {
 ```
 Après validation du login, cette route va permettre de rediriger l’utilisateur vers la page qui correspond à son rôle 
 (Etudiants, Enseignants ou Administration).
-
-### ROUTES utilisateurs :
-https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/routes.js
-**GET** /admin/user/create :
-```js
-app.get('/admin/users/create', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
-```
-Cette route permet à l’administrateur de créer un utilisateur dans la base de données.
-
-https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/routes.js
-**POST** /admin/users :
-```js
-app.post('/admin/users', passport.authenticate('local-signup', {
-	successRedirect : '/admin/users',
-	failureRedirect : '/admin/users/create',
-	failureFlash : true // allow flash messages
-}));
-```
-Cette route permet de créer un utilisateur en lui associant un nom de compte et un mot de passe.
 
 ### ROUTE profile :
 https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/routes.js

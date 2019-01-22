@@ -116,7 +116,7 @@ router.delete('/users/:id?', function(req, res, next){ CheckLog(req, res, next, 
 	...
 });
 ```
-Permet à l’administrateur de supprimer un utilisateur.
+Route qui permet à l’administrateur de supprimer un utilisateur.
 
 **GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/promosRoute.js 
 ```js
@@ -124,36 +124,77 @@ router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next
 	...
 });
 ```
-Renvoi toutes les promotions contenues dans la base de données et les affichent sous forme de groupes triés par promotion.
+Renvoi toutes les promotions contenues dans la base de données et les affichent dans la vue promotion.
 
 **POST** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/promosRoute.js
 ```js
 router.post('/promotions', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+{
+	...
+});
 ```
 Route qui permet à l’administrateur de créer une nouvelle promotion.
 
 **PUT** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/promosRoute.js
 ```js
 router.put('/promotions/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+{
+	...
+});
 ``` 
 Route qui permet à l'administrateur de modifier une promotion.
 
 **DELETE** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/promosRoute.js  
 ```js
 router.delete('/promotions/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+{
+	...
+});
 ```
 Route qui permet à l’administrateur de supprimer une promotion.
 
-**GET** https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/seancesRoute.js  
+**GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/matieresRoute.js 
 ```js
-router.get('/seances/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, "ADMINISTRATION");},function(req, res) 
+{
+	...
+});
 ```
-Route qui permet à l'utilisateur d’accéder à la vue des séances, il lui sera retourné une page contenant l’intégralité 
-des séances contenues dans la base de données. Les séances seront regroupées et triées par matières.
+Route qui permet à l’administrateur d'afficher les matières trier par promotion.
+
+**POST** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/matieresRoute.js 
+```js
+router.post('/matieres',function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+{
+	...
+});
+```
+Route qui permet à l’administrateur de créer une matière avec un enseignant (ou non).
+
+**PUT** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/matieresRoute.js 
+```js
+router.put('/matieres/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+{
+	...
+});
+```
+Route qui permet à l’administrateur de modifier une matière.
+
+**DELETE** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/matieresRoute.js 
+```js
+router.delete('/matieres/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+{
+	...
+});
+```
+Route qui permet à l’administrateur de supprimer une matière.
 
 **GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/usersRoute.js
 ```js
 router.get('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+{
+	...
+});
 ```
 Route qui permet de récupérer la vue utilisateur qui renvoie les différents “users” présent dans la base de données en fonction de 
 leurs rôles (étudiants, enseignants ou administration).
@@ -161,19 +202,35 @@ leurs rôles (étudiants, enseignants ou administration).
 **PUT** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/usersRoute.js
 ```js
 router.put('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+    {
+    	...
+});
 ```
 Permet à l’administration de modifier les caractéristiques d’un utilisateur, il peut modifier son nom, prénom, mail et promotion dans 
 le cas d’un étudiant par exemple.
 
 **POST** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/usersRoute.js
 ```js
-router.post('/upload/:id&:img', function(req, res)
+router.post('/createUser', function(req, res) {
+	var username= req.body.prenom.substring(0, 2).toLowerCase() + req.body.nom.substring(0, 4).toLowerCase();
+        var password= bcrypt.hashSync(req.body.prenom.substring(0, 2).toLowerCase() + req.body.nom.substring(0, 4).toLowerCase(), null, 	null);  // use the generateHash function in our user model
+        var nomU = req.body.nom.toUpperCase();
+        var prenomU = req.body.prenom.charAt(0).toUpperCase() + req.body.prenom.slice(1);
+        var mailU = req.body.mail;
+        var roleU = req.body.role;
+        var promotionU = null;
+        var groupeU = null;
+	...
+});
 ```
-Permet de mettre a jour la photo de profile de l'utilisateur de type étudiant.
+Permet de créer un utilisateur avec des paramêtres.
 
 **DELETE** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/usersRoute.js
 ```js
 router.delete('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+    {
+    	...
+});
 ```
 Permet à l’administration de supprimer un utilisateur dans la base de données.
 

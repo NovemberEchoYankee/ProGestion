@@ -182,7 +182,7 @@ router.get('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "E
     }
 });
 
-//Ajouter projet, si enseignant initiative étudiante projet == 1, si étudiant initiative étudiante == 0
+//Ajouter projet, si enseignant initiative statut projet == 1, si étudiant initiative statut projet == 0
 router.post('/projet',function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res)
 {
 	initiativeEtudianteProjet = 0;

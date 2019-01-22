@@ -4,35 +4,43 @@
 
 **GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js  
 ```js
-router.get('/seance', function(req, res, next) {CheckLog(req, res, next, "ENSEIGNANT");},function(req, res){
-    FactoryEnseignant(req, res, 'Enseignant/validerPresence.ejs');
+router.get('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res){
+    ...
 });
 ```
-Requête qui renvoie la vue contenant les informations nécessaires pour l’enseignant, ici l’enseignant pourra consulter la vue 
-de la fiche de présence en question (séance).
+Requête qui renvoie la vue contenant tous les projets étudiants ou enseignant. Si un id est spécifier alors renvoie la vue modification du projet.
 
-**GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
+**POST** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
 ```js
-router.get('/listEtuStandard', function(req, res, next) {CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
-    FactoryEnseignant(req, res, 'Enseignant/listEtuStandard.ejs');
+router.post('/projet',function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res){
+	...
 });
 ```
-Revoi la liste des étudiants de façon standard.
-
-**GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
-```js
-router.get('/listEtuTrombinoscope', function(req, res, next) {CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
-    FactoryEnseignant(req, res, 'Enseignant/listEtuTrombinoscope.ejs');
-});
-``` 
-Renvoi la liste des étudiants sous forme de trombinoscope. 
+Requête qui créée un projet par initiative enseignante.
 
 **PUT** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
 ```js
-router.put('/seance/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
+router.put('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res){
+    ...
+});
+``` 
+Requête qui modifie un projet avec tous ses paramêtres
+
+**PUT** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
+```js
+router.put('/projet/validate/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res){
+    ...
+});
 ```
-Permet à l’enseignant de valider une séance afin de notifier sa présence lors d'un cours. Il peut aussi émettre un commentaire en même 
-temps.
+Permet à l’enseignant de valider un projet étudiant afin que celui ci apparaisse dans les projets validés. 
+
+**DELETE** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
+```js
+router.delete('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res){
+    ...
+});
+```
+Requête qui va supprimer un projet de la base de données.
 
 **GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
 ```js
@@ -40,13 +48,7 @@ router.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ENSEI
     res.status(200).render('profile.ejs', { user : req.user });
 });
 ```
-Renvoi vers la page profile de l'enseignant connecté.
-
-**GET** https://github.com/NovemberEchoYankee/ProGestion/blob/master/app/Routes/enseignantRoutes.js
-```js
-router.get('/edtJournee', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
-```
-Renvoi l'emploi du temps de la journée de l'enseignant connecté.
+Renvoi le profil de l'enseignant
 
 ## ROUTES /etudiant :
 

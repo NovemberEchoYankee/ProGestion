@@ -323,10 +323,10 @@ Cette route permet à n’importe quel utilisateur de se déconnecter depuis tou
 
 | **HTTP verb** | **URL**                  | **Response URL** | **Response body** | **Reason** |
 |-----------|------------------------------|--------------|---------------|--------|
-| GET       | /enseignant/seance           | 200          | Retourne toutes les séances de l'enseignant |     |
+| GET       | /enseignant/projet           | 200          | Retourne tous les projets de l'enseignant |     |
 |           |                              | 500          |               | Erreur interne du serveur |
-| PUT       | /enseignant/seance/:id?      | 500          |               | Erreur interne du serveur |
-| GET       | /etudiant/seance/:id?        | 200          | Retourne la séances que l'étudiant doit valider |        |
+| PUT       | /enseignant/projet/:id?      | 500          |               | Erreur interne du serveur |
+| GET       | /etudiant/projet/:id?        | 200          | Retourne la séances que l'étudiant doit valider |        |
 |           |                              | 404          |               | Ressource non trouvée |
 |           |                              | 500          |               | Erreur interne du serveur |
 | POST      | /etudiant/seance/:id?        | 201          | Crée la validation d'une séance |        |

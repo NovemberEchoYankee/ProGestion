@@ -44,10 +44,14 @@ Ci-après la maquette de la gestion des users :
   
 ![Connexion](page_admin_users_progestion.png)
 
-Ci-après la maquette de la gestion des projets par l'enseignant : 
+Ci-après la maquette de la gestion des promotions : 
   
-![Connexion](page_enseignante_gestion_projets_progestion.png)
+![Connexion](page_admin_promo_progestion.png)
 
-Ci-après la maquette de la gestion des projets par l'étudiant : 
+Ci-après la maquette de la gestion des matières : 
   
-![Connexion](page_etudiant_gestion_projets_progestion.png)
+![Connexion](page_admin_matiere_progestion.png)
+
+Ci-après la maquette de la création des users : 
+  
+![Connexion](page_admin_create_users_progestion.png)

@@ -240,11 +240,29 @@ router.post('/projet/postule/:id?', function(req, res, next){ CheckLog(req, res,
 	}
 });
 
-
+//------------
+// Afficher le profil - Etudiant -
 router.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res) {
     res.status(200).render('profile.ejs', { user : req.user });
 });
-
+// à reprendre ?
+/*,
+			function (parallel_done) {
+				var query1 = Groupe.PutGroupeEtudiant( ,req.user.id, function (err, rows1) {
+					if (err)
+					{
+						res.status(500).render('errorRequest.ejs', {page_title:"Error M3", role:req.user.roleU, ressource: "/etudiant/projet"}+ req.param("id"));
+						return false;
+					}
+					if (rows1.length <= 0) {
+						res.status(404).render('errorRessource.ejs', {page_title: "Error", role:req.user.roleU, ressource: "/etudiant/projet/" + req.param("id")
+						});
+						return false;
+					}
+					data.table1 = rows1;
+					parallel_done();
+				});
+			},*/
 
 module.exports = router;
 

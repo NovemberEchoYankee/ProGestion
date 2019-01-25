@@ -57,6 +57,7 @@ router.get('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "E
                 if (err)
                     res.status(500).render('errorRequest.ejs', {page_title:"Error A3", role:req.user.roleU, ressource: "/enseignant/projet"}+ req.param("id"));
                 else
+					// --> Créer projet
                     res.status(200).render('Projets/createProjet.ejs', {page_title: "createProjet", promos:data.table, matieres:data.table1, chemin: "enseignant/projet/"});
             });
         }
@@ -122,6 +123,7 @@ router.get('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "E
                 if (err)
                     res.status(500).render('errorRequest.ejs', {page_title:"Error A2", role:req.user.roleU, ressource: "/enseignant/projet"}+ req.param("id"));
                 else
+					// --> Editer projet
                     res.status(200).render('Projets/detailProjet.ejs', {page_title: "detailProjet", matieres:data.table2, promos:data.table1, projet:data.table, chemin: "enseignant/projet/"});
             });
         }
@@ -176,6 +178,7 @@ router.get('/projet/:id?', function(req, res, next){ CheckLog(req, res, next, "E
             if(err)
                 res.status(500).render('errorRequest.ejs', {page_title:"Error A", role:req.user.roleU, ressource: "/enseignant/projet"});
             else
+				// Afficher projets
                 res.status(200).render('Projets/allProjets.ejs',{page_title:"allProjets", matieres:data2.table, promos:data2.table1, projets:data2.table2, etudiants:data2.table3, chemin:"enseignant/projet/"});
         });
     }

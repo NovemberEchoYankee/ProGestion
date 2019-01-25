@@ -39,7 +39,7 @@ router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next
     }
 });
 
-
+// Supprimer une promo
 router.delete('/promotions/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
 {
     if(req.param("id")) {
@@ -83,7 +83,7 @@ router.delete('/promotions/:id?', function(req, res, next){ CheckLog(req, res, n
 });
 
 
-
+//modifier promo
 router.put('/promotions/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
 {
     if (req.param("id")) {
@@ -95,7 +95,7 @@ router.put('/promotions/:id?', function(req, res, next){ CheckLog(req, res, next
         });
     }
 });
-
+// Ajouter promo
 router.post('/promotions', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
 {
     var nomP = req.body.nom;

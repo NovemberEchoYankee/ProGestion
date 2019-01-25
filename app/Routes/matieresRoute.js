@@ -10,6 +10,7 @@ var async = require('async');
 // MATIERES ==========================
 // =====================================
 
+// Ajouter matière sinon Editer matière sinon voir les matières
 router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, "ADMINISTRATION");},function(req, res) {
 
     var data = {};

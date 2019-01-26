@@ -367,6 +367,9 @@ Cette route permet à n’importe quel utilisateur de se déconnecter depuis tou
 |           |                              | 500          |               | Erreur interne du serveur |
 | PUT       | /admin/promotions/:id?       | 500          |               | Erreur interne du serveur |
 | DELETE    | /admin/promotions/:id?       | 500          |               | Erreur interne du serveur |
+| POST      | /admin/users                 |              | Renvoi les données liées au compte utilisateur              |        |
+|           |                              | 404          |               | Ressource non trouvée |
+|           |                              | 500          |               | Erreur interne du serveur |
 | GET       | /admin/users/:id?            | 200          | Retourne un utilisateur demandé |        |
 |           |                              | 404          |               | Ressource non trouvée |
 |           |                              | 500          |               | Erreur interne du serveur |
@@ -378,10 +381,6 @@ Cette route permet à n’importe quel utilisateur de se déconnecter depuis tou
 | GET       | /login                       | 200          | Retourne la connexion |        |
 | POST      | /login                       |              | Renvoi les données entrées |        |
 | GET       | /redirectByRole              | 200          | Retourne la page attribué a chaque type d'utilisateur |        |
-| GET       | /admin/users/create          | 201          | Crée un compte utilisateur |        |
-|           |                              | 404          |               | Ressource non trouvée |
-|           |                              | 500          |               | Erreur interne du serveur |
-| POST      | /admin/users                 |              | Renvoi les données liées au compte utilisateur              |        |
 | GET       | /profile                     | 200          | Retourne la page profile de l'utilisateur |        |
 | GET       | /admin                       | 200          | Retourne l'acceuil administrateur |        |
 | GET       | /logout                      | 200          | Déconnecte l'utilisateur et retourne la page de connexion |        |

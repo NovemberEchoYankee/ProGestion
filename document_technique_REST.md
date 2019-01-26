@@ -323,14 +323,36 @@ Cette route permet à n’importe quel utilisateur de se déconnecter depuis tou
 
 | **HTTP verb** | **URL**                  | **Response URL** | **Response body** | **Reason** |
 |-----------|------------------------------|--------------|---------------|--------|
-| GET       | /enseignant/projet           | 200          | Retourne tous les projets de l'enseignant |     |
-|           |                              | 500          |               | Erreur interne du serveur |
-| PUT       | /enseignant/projet/:id?      | 500          |               | Erreur interne du serveur |
-| GET       | /etudiant/projet/:id?        | 200          | Retourne la séances que l'étudiant doit valider |        |
+| **Enseignant** |
+| GET       | /enseignant/projet           | 200          | Retourne tous les projets de l'enseignant par matière |     |
 |           |                              | 404          |               | Ressource non trouvée |
 |           |                              | 500          |               | Erreur interne du serveur |
-| POST      | /etudiant/seance/:id?        | 201          | Crée la validation d'une séance |        |
+| GET       | /enseignant/projet/create    | 200          | Retourne la page création d'un projet |     |
+|           |                              | 404          |               | Ressource non trouvée |
 |           |                              | 500          |               | Erreur interne du serveur |
+| GET       | /enseignant/projet/:id?      | 200          | Retourne un projet demandé |     |
+|           |                              | 404          |               | Ressource non trouvée |
+|           |                              | 500          |               | Erreur interne du serveur |
+| POST      | /enseignant/projet           | 201          | Crée un projet |     |
+|           |                              | 500          |               | Erreur interne du serveur |
+| PUT       | /enseignant/projet/:id?      | 500          |               | Erreur interne du serveur |
+| PUT       | /enseignant/projet/validate/:id? | 500          |               | Erreur interne du serveur |
+| DELETE    | /enseignant/projet/:id?      | 500          |               | Erreur interne du serveur |
+| **Etudiant** |
+| GET       | /etudiant/projet/            | 200          | Retourne les projets proposés par les enseignants par matière |        |
+|           |                              | 404          |               | Ressource non trouvée |
+|           |                              | 500          |               | Erreur interne du serveur |
+| GET       | /etudiant/projet/create      | 200          | Retourne la page création d'un projet |        |
+|           |                              | 404          |               | Ressource non trouvée |
+|           |                              | 500          |               | Erreur interne du serveur |
+| GET       | /etudiant/projet/:id?        | 200          | Retourne un projet demandé |        |
+|           |                              | 404          |               | Ressource non trouvée |
+|           |                              | 500          |               | Erreur interne du serveur |
+| POST      | /etudiant/projet       | 201          | Crée un projet |        |
+|           |                              | 500          |               | Erreur interne du serveur |
+| POST      | /etudiant/projet/postule/:id?       | 201          | Crée un groupe projet |        |
+|           |                              | 500          |               | Erreur interne du serveur |
+| **Administrateur** |
 | GET       | /admin/matieres/:id?         | 200          | Retourne une matière demandé |        |
 |           |                              | 404          |               | Ressource non trouvée |
 |           |                              | 500          |               | Erreur interne du serveur |
@@ -345,15 +367,10 @@ Cette route permet à n’importe quel utilisateur de se déconnecter depuis tou
 |           |                              | 500          |               | Erreur interne du serveur |
 | PUT       | /admin/promotions/:id?       | 500          |               | Erreur interne du serveur |
 | DELETE    | /admin/promotions/:id?       | 500          |               | Erreur interne du serveur |
-| GET       | /admin/seances/:id?          | 200          | Retourne une séance demandé |        |
-|           |                              | 404          |               | Ressource non trouvée |
-|           |                              | 500          |               | Erreur interne du serveur |
-| POST      | /admin/seances               | 201          | Crée une séance dans la table |        |
-|           |                              | 500          |               | Erreur interne du serveur |
-| PUT       | /admin/seances/:id?          | 500          |               | Erreur interne du serveur |
-| DELETE    | /admin/seances/:id?          | 500          |               | Erreur interne du serveur |
 | GET       | /admin/users/:id?            | 200          | Retourne un utilisateur demandé |        |
 |           |                              | 404          |               | Ressource non trouvée |
+|           |                              | 500          |               | Erreur interne du serveur |
+| POST      | /admin/users/create          | 201          | Crée un utilisateur dans la table |        |
 |           |                              | 500          |               | Erreur interne du serveur |
 | PUT       | /admin/users/:id?            | 500          |               | Erreur interne du serveur |
 | DELETE    | /admin/users/:id?            | 500          |               | Erreur interne du serveur |

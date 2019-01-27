@@ -55,3 +55,22 @@ Ci-après la maquette de la gestion des matières :
 Ci-après la maquette de la création des users : 
   
 ![Connexion](page_admin_create_users_progestion.png)
+
+## Pour installer le projet en local
+
+1/ Faire git clone du repositorie : 
+```
+git clone https://github.com/NovemberEchoYankee/ProGestion.git
+```
+2/ Se placer dans le projet : 
+```
+cd progestion
+```
+3/ Lancer commande NPM : 
+```
+npm install
+```
+```
+npm update
+```
+4/ Demander shéma SQL 

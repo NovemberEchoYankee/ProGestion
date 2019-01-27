@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <title>Accueil</title>
+    <% include layout%>
+</head>
+<body>
+<div class="wrapper">
+    <% if (user.roleU == "ETUDIANT"){ %>
+    <% include Menus/MenuEtudiant %>
+    <% } else if (user.roleU == "ENSEIGNANT"){ %>
+    <% include Menus/MenuEnseignant %>
+    <% } else { %>
+    <% include Menu %>
+    <% } %>
+    <!-- Page Content  -->
+    <div id="content">
+        <div class="container">
+            <h1><span class="accueil-titre">Progestion</span></h1>
+            <h3><span class="accueil-titre">Bienvenue ! </span> </h3>
+            <a href="/etudiant/mesProjet" class="action-button shadow animate blue">Mes Projets</a>
+            <a href="/etudiant/projet" class="action-button shadow animate red">Les Projets</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

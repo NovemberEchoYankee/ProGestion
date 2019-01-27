@@ -55,16 +55,24 @@ module.exports = function(app, passport) {
 
     	switch(req.user.roleU){
 			case "ETUDIANT":
-				var returnTo = "etudiant/profile";
+				var returnTo = "etudiant/";
 				break;
 			case "ENSEIGNANT":
-				var returnTo = "enseignant/projet";
+				var returnTo = "enseignant/";
 				break;
 			case "ADMINISTRATION":
 				var returnTo = "admin/";
 				break;
 		}
         res.status(200).redirect(returnTo);
+    });
+
+    app.get('/etudiant',function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function (req, res){
+        res.status(200).render('etudiant.ejs', {user : req.user});
+    });
+
+    app.get('/enseignant',function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function (req, res){
+        res.status(200).render('enseignant.ejs', {user : req.user});
     });
 	
 	app.post('/signup', function(req, res) {

@@ -85,7 +85,9 @@ a:focus {
 }
 
 #sidebar ul.components li a:hover {
-    background: #2c3e50;
+    /*background: #2c3e50;*/
+    background: #ffffff;
+    color: #6b7381;
 }
 
 #sidebar ul.components li.active {
@@ -147,7 +149,6 @@ ul.CTAs a {
 .button-two {
     border: none;
     padding: 20px;
-    transition: all 0.1s;
 }
 
 
@@ -155,16 +156,17 @@ ul.CTAs a {
     cursor: pointer;
     display: inline-block;
     position: relative;
-    transition: 0.1s;
+    transition: 0.4s;
 }
 
 .button-two span:after {
     content: '»';
+    color: #6b7381;
     position: absolute;
     opacity: 0;
     top: 0;
     right: -20px;
-    transition: 0.1s;
+    transition: 0.4s;
 }
 
 .button-two:hover span {

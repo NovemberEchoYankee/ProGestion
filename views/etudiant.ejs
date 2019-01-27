@@ -17,9 +17,11 @@
     <div id="content">
         <div class="container">
             <h1><span class="accueil-titre">Progestion</span></h1>
-            <h3><span class="accueil-titre">Bienvenue ! </span> </h3>
-            <a href="/etudiant/mesProjet" class="action-button shadow animate blue">Mes Projets</a>
-            <a href="/etudiant/projet" class="action-button shadow animate red">Les Projets</a>
+            <h3><span class="accueil-bienvenue">Bienvenue <%= user.prenomU %> <%= user.nomU %>! Que voulez-vous faire ? :) </span> </h3>
+            <div class="accueil-menu">
+                <a href="/etudiant/mesProjet" class="action-button shadow animate blue">Mes Projets</a>
+                <a href="/etudiant/projet" class="action-button shadow animate red">Les Projets</a>
+            </div>
         </div>
     </div>
 </div>

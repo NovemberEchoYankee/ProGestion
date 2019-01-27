@@ -1,6 +1,7 @@
-
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700italic);
 body {
     background: #fafafa;
+    font-family: 'Open Sans', sans-serif;
 }
 
 a,
@@ -8,7 +9,6 @@ a:hover,
 a:focus {
     color: inherit;
     text-decoration: none;
-    transition: all 0.3s;
 }
 
 .navbar {
@@ -83,8 +83,7 @@ a:focus {
 }
 
 #sidebar ul.components li a:hover {
-    color: rgb(133,167,185);
-    background: #fff;
+    background: #2c3e50;
 }
 
 #sidebar ul.components li.active {
@@ -94,7 +93,7 @@ a:focus {
 
 #sidebarCollapse {
 	position: fixed;
-	top: 20px;  
+	top: 20px;
 	z-index: 999;
 	display: block;
 	width: 50px;
@@ -135,6 +134,46 @@ ul.CTAs a {
     margin-bottom: 5px;
 }
 
+.button-one, .button-two, .button-three{
+    text-align: left;
+    cursor: pointer;
+    font-size:24px;
+}
+/*Button Two*/
+
+
+.button-two {
+    border: none;
+    padding: 20px;
+    transition: all 0.1s;
+}
+
+
+.button-two span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.1s;
+}
+
+.button-two span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.1s;
+}
+
+.button-two:hover span {
+    padding-right: 25px;
+}
+
+.button-two:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -152,6 +191,7 @@ ul.CTAs a {
 #content.active {
     width: 100%;
 }
+
 
 /* ---------------------------------------------------
     MEDIAQUERIES

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Profil</title>
+    <title>Accueil</title>
     <% include layout%>
 </head>
 <body>
@@ -16,21 +16,10 @@
     <!-- Page Content  -->
     <div id="content">
         <div class="container">
-            <h1> Profil</h1>
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="well">
-                        <h3><span class="fa fa-user"></span> </h3>
-                        <p>
-                            <strong>Nom</strong>: <%= user.nomU %><br>
-                            <br>
-                            <strong>Prénom</strong>: <%= user.prenomU %><br>
-                            <% if (user.roleU == "ETUDIANT"){ %>
-                            <strong>Promo</strong>: <%= user.nomP %>
-                            <% } %>
-                        </p>
-                    </div>
-                </div>
+            <h1><span class="accueil-titre">Progestion</span></h1>
+            <h3><span class="accueil-bienvenue">Bienvenue <%= user.prenomU %> <%= user.nomU %>! Que voulez-vous faire ? :) </span> </h3>
+            <div class="accueil-menu">
+                <a href="/enseignant/projet" class="action-button shadow animate blue">Les Projets</a>
             </div>
         </div>
     </div>
